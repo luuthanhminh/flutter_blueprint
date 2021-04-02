@@ -57,7 +57,12 @@ There are 3 main modules to help separate the code. They are Data, Domain, and A
 # View
  - Observes changes from ViewModel.
  - Updates UI.
-
+# Data Sources
+ - Fetch data from json files.
+```
+    assets/data/cards.json
+    assets/data/components.json
+```
 
 <h3 align="center">Architecture</h3>
 <img src="./architecture.png" style="display: block; margin-left: auto; margin-right: auto; width: 50%;"/>
