@@ -1,0 +1,23 @@
+[
+    {
+        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+        "url" : "https://www.google.com/"
+    },
+    {
+        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+        "url" : "https://github.com/"
+    },
+    {
+        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+        "url" : "https://flutter.dev/"
+    },
+    {
+        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Facilisi nunc non, luctus fringilla tempus. Curabitur est.",
+        "url" : "https://riverpod.dev/"
+    },
+    {
+        "text" : "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut id vestibulum nisl auctor.",
+        "url" : "https://pub.dev/"
+    }
+
+]

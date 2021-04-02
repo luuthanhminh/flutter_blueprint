@@ -1,0 +1,7 @@
+./src/repositories/cards_repository.dart
+./src/repositories/repositories.dart
+./src/usecases/base_usecase.dart
+./src/usecases/fetch_cards_usecase.dart
+./src/usecases/usecases.dart
+./src/entities/card.dart
+./src/entities/entities.dart
