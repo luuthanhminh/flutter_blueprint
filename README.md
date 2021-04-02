@@ -27,13 +27,13 @@ Flutter Architecture Blueprints is a project that combine clean architecture wit
 
 ## App architecture
 
-There are 3 main modules to help separate the code. They are Data, Domain, and Application.
+There are 3 main modules to help separate the code. They are Data, Domain, and Presentation.
    
-- **Data (Particular project)** contains Local/Remote Data Source, APIs, Data objects (Request/Response object, DB objects), and the repository implementation.
+- **Data (Particular project)**: contains Local/Remote Data Source, APIs, Data objects (Request/Response object, DB objects), and the repository implementation.
    
-- **Domain (Particular project)** contains UseCases, Domain Objects/Models, and Repository Interfaces
+- **Domain (Particular project)**: contains UseCases, Domain Objects/Models, and Repository Interfaces
    
-- **Presentation** contains UI, style, app configurations, viewmodel (hold view state and presentation logic), etc. Can be split into separate modules itself if needed. For example, we could have a module called Device handling things like camera, location, etc.
+- **Presentation**: contains UI, app style, app configurations, View Model (hold view state and presentation logic), etc. Can be split into separate modules itself if needed. For example, we could have a module called Device which handles platform things such as camera, location, etc.
 
 # Entities
  - Enterprise-wide business rules
