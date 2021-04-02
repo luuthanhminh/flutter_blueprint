@@ -8,7 +8,8 @@ Flutter Architecture Blueprint is a project that combines Clean Architecture wit
 - [Flutter documentation](https://flutter.dev/docs)
 - [The Clean Architecture (Uncle Bob)](https://blog.cleancoder.com/uncle-bob/2012/08/13/the-clean-architecture.html)
 - [MVVM pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)
-- [Riverpod](https://riverpod.dev/)
+- [Riverpod (State Management)](https://riverpod.dev/)
+- [get_it (Dependency Injection)](https://pub.dev/packages/get_it)
 
 ## Requirements
 
@@ -91,6 +92,8 @@ make build-apk
 ### Test
 
 - [Mockito](https://pub.dev/packages/mockito)
+- [Unit testing](https://flutter.dev/docs/cookbook/testing/unit/introduction)
+- [Widget testing](https://flutter.dev/docs/cookbook/testing/widget/introduction)
 - Write unit test for ViewModel (**CardsViewModel** & **ComponentsViewModel**).
 - Able to write particular unit test for **data** module and **domain** module.
 
