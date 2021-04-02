@@ -1,6 +1,6 @@
 # Flutter Architecture Blueprints
 
-Flutter Architecture Blueprints is a project that combine clean architecture with MVVM pattern to developing. Flutter apps.
+Flutter Architecture Blueprint is a project that combines Clean Architecture with MVVM pattern to develop Flutter apps.
 
 ## Documentation
 
