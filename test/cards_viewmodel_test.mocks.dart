@@ -12,11 +12,11 @@ class MockNavigationService extends _i1.Mock implements _i2.NavigationService {
   }
 }
 
-/// A class which mocks [IDialogService].
+/// A class which mocks [DialogService].
 ///
 /// See the documentation for Mockito's code generation for more information.
-class MockIDialogService extends _i1.Mock implements _i3.IDialogService {
-  MockIDialogService() {
+class MockDialogService extends _i1.Mock implements _i3.DialogService {
+  MockDialogService() {
     _i1.throwOnMissingStub(this);
   }
 }

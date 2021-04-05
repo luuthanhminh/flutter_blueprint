@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 
 abstract class BaseViewModel extends ChangeNotifier {
   final NavigationService navigationService;
-  final IDialogService dialogService;
+  final DialogService dialogService;
 
   BaseViewModel(this.navigationService, this.dialogService);
 }

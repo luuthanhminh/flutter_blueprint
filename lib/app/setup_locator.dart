@@ -20,7 +20,7 @@ Future setupLocator() async {
       () => ComponentsRepositoryImpl(locator()));
 
   // Services
-  locator.registerLazySingleton<IDialogService>(() => DialogService(locator()));
+  locator.registerLazySingleton<DialogService>(() => DialogServiceImpl(locator()));
 
   setupUseCases();
 

@@ -12,27 +12,27 @@ import 'components_viewmodel_test.mocks.dart';
 
 
 @GenerateMocks([NavigationService])
-@GenerateMocks([IDialogService])
+@GenerateMocks([DialogService])
 @GenerateMocks([FetchComponentsUseCase])
 void main(){
 
-  MockIDialogService mockIDialogService;
+  MockDialogService mockDialogService;
   MockFetchComponentsUseCase mockFetchComponentsUseCase;
   MockNavigationService mockNavigationService;
   group('Components ViewModel', () {
     setUpAll(() async {
       mockNavigationService = MockNavigationService();
       mockFetchComponentsUseCase = MockFetchComponentsUseCase();
-      mockIDialogService = MockIDialogService();
+      mockDialogService = MockDialogService();
       
-      when(mockIDialogService.showLoading()).thenAnswer((_) async {});
-      when(mockIDialogService.hideLoading()).thenAnswer((_) { });
+      when(mockDialogService.showLoading()).thenAnswer((_) async {});
+      when(mockDialogService.hideLoading()).thenAnswer((_) { });
       when(mockNavigationService.pushNamed(any)).thenAnswer((_) async { });
       when(mockNavigationService.pushNamed(any, args: anyNamed('args'))).thenAnswer((_) async { });
     });
     test('Should have components if fetching componenets success', () async {
       // Arrange
-      final componentsViewModel = ComponentsViewModel(mockNavigationService, mockIDialogService, mockFetchComponentsUseCase);
+      final componentsViewModel = ComponentsViewModel(mockNavigationService, mockDialogService, mockFetchComponentsUseCase);
       when(mockFetchComponentsUseCase.perform()).thenAnswer((_) async {
         final components = [Component(text: '', url: ''), Component(text: '', url: '')];
         return components;
@@ -46,7 +46,7 @@ void main(){
     });
     test('Should have no components if fetching componenets throws exception', () async {
       // Arrange
-      final componentsViewModel = ComponentsViewModel(mockNavigationService, mockIDialogService, mockFetchComponentsUseCase);
+      final componentsViewModel = ComponentsViewModel(mockNavigationService, mockDialogService, mockFetchComponentsUseCase);
       when(mockFetchComponentsUseCase.perform()).thenThrow(Exception());
       
       // Act
@@ -57,7 +57,7 @@ void main(){
     });
     test('Should navigate to In-app browser if url is not empty', () async {
       // Arrange
-      final componentsViewModel = ComponentsViewModel(mockNavigationService, mockIDialogService, mockFetchComponentsUseCase);
+      final componentsViewModel = ComponentsViewModel(mockNavigationService, mockDialogService, mockFetchComponentsUseCase);
       when(mockFetchComponentsUseCase.perform()).thenThrow(Exception());
       final url = 'https://flutter.dev/';
       // Act
@@ -68,7 +68,7 @@ void main(){
     });
     test('Should not navigate to In-app browser if url is empty', () async {
       // Arrange
-      final componentsViewModel = ComponentsViewModel(mockNavigationService, mockIDialogService, mockFetchComponentsUseCase);
+      final componentsViewModel = ComponentsViewModel(mockNavigationService, mockDialogService, mockFetchComponentsUseCase);
       when(mockFetchComponentsUseCase.perform()).thenThrow(Exception());
       final url = '';
       // Act

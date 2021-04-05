@@ -18,7 +18,7 @@ class ComponentsViewModel extends BaseViewModel {
   final FetchComponentsUseCase _fetchComponentsUseCase;
 
   ComponentsViewModel(NavigationService navigationService,
-      IDialogService dialogService, this._fetchComponentsUseCase)
+      DialogService dialogService, this._fetchComponentsUseCase)
       : super(navigationService, dialogService);
 
   List<Component> components = [];

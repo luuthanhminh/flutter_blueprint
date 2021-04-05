@@ -18,7 +18,7 @@ class CardsViewModel extends BaseViewModel {
   final FetchCardsUseCase _fetchCardsUseCase;
 
   CardsViewModel(NavigationService navigationService,
-      IDialogService dialogService, this._fetchCardsUseCase)
+      DialogService dialogService, this._fetchCardsUseCase)
       : super(navigationService, dialogService);
 
   List<Card> cards = [];

@@ -70,7 +70,9 @@ class CardsPage extends HookWidget {
                               )),
                           child: InkWell(
                               onTap: () {
-                                ctx.read(cardsViewModelProvider).navigateToScreen2();
+                                ctx
+                                    .read(cardsViewModelProvider)
+                                    .navigateToScreen2();
                               },
                               child: Container(
                                   padding:
@@ -98,7 +100,9 @@ class CardsPage extends HookWidget {
                               )),
                           child: InkWell(
                               onTap: () {
-                                ctx.read(cardsViewModelProvider).navigateToComponentsPage();
+                                ctx
+                                    .read(cardsViewModelProvider)
+                                    .navigateToComponentsPage();
                               },
                               child: Container(
                                   padding:

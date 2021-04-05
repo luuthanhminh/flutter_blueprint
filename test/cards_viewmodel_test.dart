@@ -10,26 +10,26 @@ import 'package:mockito/mockito.dart';
 import 'cards_viewmodel_test.mocks.dart';
 
 @GenerateMocks([NavigationService])
-@GenerateMocks([IDialogService])
+@GenerateMocks([DialogService])
 @GenerateMocks([FetchCardsUseCase])
 void main(){
 
-  MockIDialogService mockIDialogService;
+  MockDialogService mockDialogService;
   MockFetchCardsUseCase mockFetchCardsUseCase;
   MockNavigationService mockNavigationService;
   group('Cards ViewModel', () {
     setUpAll(() async {
       mockNavigationService = MockNavigationService();
       mockFetchCardsUseCase = MockFetchCardsUseCase();
-      mockIDialogService = MockIDialogService();
+      mockDialogService = MockDialogService();
       
-      when(mockIDialogService.showLoading()).thenAnswer((_) async {});
-      when(mockIDialogService.hideLoading()).thenAnswer((_) { });
+      when(mockDialogService.showLoading()).thenAnswer((_) async {});
+      when(mockDialogService.hideLoading()).thenAnswer((_) { });
       when(mockNavigationService.pushNamed(any)).thenAnswer((_) async { });
     });
     test('Should have cards if fetching cards success', () async {
       // Arrange
-      final cardsViewModel = CardsViewModel(mockNavigationService, mockIDialogService, mockFetchCardsUseCase);
+      final cardsViewModel = CardsViewModel(mockNavigationService, mockDialogService, mockFetchCardsUseCase);
       when(mockFetchCardsUseCase.perform()).thenAnswer((_) async {
         final cards = [Card(header: '', description: '', images: []), Card(header: '', description: '', images: [])];
         return cards;
@@ -43,7 +43,7 @@ void main(){
     });
     test('Should have no cards if fetching cards throws exception', () async {
       // Arrange
-      final cardsViewModel = CardsViewModel(mockNavigationService, mockIDialogService, mockFetchCardsUseCase);
+      final cardsViewModel = CardsViewModel(mockNavigationService, mockDialogService, mockFetchCardsUseCase);
       when(mockFetchCardsUseCase.perform()).thenThrow(Exception());
       
       // Act
@@ -55,7 +55,7 @@ void main(){
 
     test('Should navigation to Screen 2 when navigateToScreen2 function is excuted', () async {
       // Arrange
-      final cardsViewModel = CardsViewModel(mockNavigationService, mockIDialogService, mockFetchCardsUseCase);
+      final cardsViewModel = CardsViewModel(mockNavigationService, mockDialogService, mockFetchCardsUseCase);
       // Act
       cardsViewModel.navigateToScreen2();
 
@@ -64,7 +64,7 @@ void main(){
     });
     test('Should navigation to Components Page when navigateToComponentsPage function is excuted', () async {
       // Arrange
-      final cardsViewModel = CardsViewModel(mockNavigationService, mockIDialogService, mockFetchCardsUseCase);
+      final cardsViewModel = CardsViewModel(mockNavigationService, mockDialogService, mockFetchCardsUseCase);
       // Act
       cardsViewModel.navigateToComponentsPage();
 

@@ -2,15 +2,15 @@ import 'package:fl_blueprint/services/navigation_service.dart';
 import 'package:fl_blueprint/widgets/loading_indicator/circle_indicator.dart';
 import 'package:flutter/material.dart';
 
-abstract class IDialogService {
+abstract class DialogService {
   Future showLoading();
   void hideLoading();
 }
 
-class DialogService implements IDialogService {
+class DialogServiceImpl implements DialogService {
 
   final NavigationService _navigationService;
-  DialogService(this._navigationService);
+  DialogServiceImpl(this._navigationService);
 
   bool _isShowLoading = false;
 
