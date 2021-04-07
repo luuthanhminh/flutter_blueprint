@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Exposes for UI
 final componentsViewModelProvider =
-    AutoDisposeChangeNotifierProvider((ref) => locator.get<ComponentsViewModel>());
+    ChangeNotifierProvider((ref) => locator.get<ComponentsViewModel>());
 
 final componentsProvider = Provider.autoDispose((ref) => ref.watch(componentsViewModelProvider).components);
 

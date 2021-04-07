@@ -8,7 +8,7 @@ import 'package:hooks_riverpod/hooks_riverpod.dart';
 
 // Exposes for UI
 final cardsViewModelProvider =
-    AutoDisposeChangeNotifierProvider((ref) => locator.get<CardsViewModel>());
+    ChangeNotifierProvider((ref) => locator.get<CardsViewModel>());
 
 final cardsProvider = Provider.autoDispose((ref) => ref.watch(cardsViewModelProvider).cards);
 
