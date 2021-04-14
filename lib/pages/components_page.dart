@@ -1,5 +1,6 @@
 import 'package:domain/domain.dart';
 import 'package:fl_blueprint/app/app_resouces.dart';
+import 'package:fl_blueprint/app/setup_locator.dart';
 import 'package:fl_blueprint/view_models/components_viewmodel.dart';
 import 'package:fl_blueprint/widgets/screen_widget.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +8,14 @@ import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/size_extension.dart';
 
+// Providers
+final componentsViewModelProvider =
+    AutoDisposeChangeNotifierProvider((ref) => locator.get<ComponentsViewModel>());
+
 class ComponentsPage extends HookWidget {
+
+final componentsProvider = Provider.autoDispose((ref) => ref.watch(componentsViewModelProvider).components);
+
   @override
   Widget build(BuildContext context) {
     useEffect(() {
@@ -15,7 +23,7 @@ class ComponentsPage extends HookWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         context.read(componentsViewModelProvider).initialize();
       });
-      return context.read(componentsViewModelProvider).dispose;
+      return;
     }, []);
     return ScreenWidget(
         backgroundColor: Color(0xFF141D28),

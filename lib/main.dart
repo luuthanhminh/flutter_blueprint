@@ -6,17 +6,26 @@ import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 
+class Logger extends ProviderObserver {
+  
+  @override
+  void didUpdateProvider(ProviderBase provider, Object newValue) {
+    print('''
+{
+  "provider": "${provider.name ?? provider.runtimeType}",
+  "newValue": "$newValue"
+}''');
+  }
+}
+
 Future main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   // sets up the internal locator
   await setupLocator();
 
-  
-
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown])
       .then((_) {
-    runApp(ProviderScope(child: new MyApp()));
+    runApp(ProviderScope(observers: [Logger()], child: new MyApp()));
   });
 }
 

@@ -1,4 +1,5 @@
 import 'package:fl_blueprint/app/app_resouces.dart';
+import 'package:fl_blueprint/app/setup_locator.dart';
 import 'package:fl_blueprint/view_models/cards_viewmodel.dart';
 import 'package:fl_blueprint/widgets/screen_widget.dart';
 import 'package:flutter/material.dart';
@@ -8,7 +9,14 @@ import 'package:flutter_screenutil/size_extension.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:domain/domain.dart' as Domain;
 
+// Providers
+final cardsViewModelProvider =
+    AutoDisposeChangeNotifierProvider((ref) => locator.get<CardsViewModel>());
+
 class CardsPage extends HookWidget {
+  final cardsProvider =
+      Provider.autoDispose((ref) => ref.watch(cardsViewModelProvider).cards);
+
   @override
   Widget build(BuildContext context) {
     useEffect(() {
@@ -16,7 +24,7 @@ class CardsPage extends HookWidget {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         context.read(cardsViewModelProvider).initialize();
       });
-      return context.read(cardsViewModelProvider).dispose;
+      return;
     }, []);
     return ScreenWidget(
         backgroundColor: Color(0xFF141D28),

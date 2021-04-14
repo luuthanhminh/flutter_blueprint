@@ -1,16 +1,9 @@
 import 'package:domain/domain.dart';
 import 'package:fl_blueprint/app/app_router.dart';
-import 'package:fl_blueprint/app/setup_locator.dart';
 import 'package:fl_blueprint/services/navigation_service.dart';
 import 'package:fl_blueprint/services/dialog_service.dart';
 import 'package:fl_blueprint/view_models/base/base_viewmodel.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
 
-// Exposes for UI
-final componentsViewModelProvider =
-    ChangeNotifierProvider((ref) => locator.get<ComponentsViewModel>());
-
-final componentsProvider = Provider.autoDispose((ref) => ref.watch(componentsViewModelProvider).components);
 
 // Presentation logic
 class ComponentsViewModel extends BaseViewModel {
@@ -44,6 +37,5 @@ class ComponentsViewModel extends BaseViewModel {
     if(url.isNotEmpty) {
       navigationService.pushNamed(AppRoute.inAppWebViewPage,args: url);
     }
-    
   }
 }

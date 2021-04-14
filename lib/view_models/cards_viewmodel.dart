@@ -1,16 +1,8 @@
 import 'package:domain/domain.dart';
 import 'package:fl_blueprint/app/app_router.dart';
-import 'package:fl_blueprint/app/setup_locator.dart';
 import 'package:fl_blueprint/services/navigation_service.dart';
 import 'package:fl_blueprint/services/dialog_service.dart';
 import 'package:fl_blueprint/view_models/base/base_viewmodel.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
-// Exposes for UI
-final cardsViewModelProvider =
-    ChangeNotifierProvider((ref) => locator.get<CardsViewModel>());
-
-final cardsProvider = Provider.autoDispose((ref) => ref.watch(cardsViewModelProvider).cards);
 
 // Presentation logic
 class CardsViewModel extends BaseViewModel {
