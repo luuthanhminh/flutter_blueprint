@@ -1,6 +1,6 @@
-import 'package:fl_blueprint/services/navigation_service.dart';
-import 'package:fl_blueprint/widgets/loading_indicator/circle_indicator.dart';
 import 'package:flutter/material.dart';
+import '../widgets/loading_indicator/circle_indicator.dart';
+import 'navigation_service.dart';
 
 /// Dialog service interface
 abstract class DialogService {

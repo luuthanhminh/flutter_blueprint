@@ -213,7 +213,7 @@ class _CarouselCardItemViewState extends State<_CarouselCardItemView> {
                             boldSFTextStyle(size: 24.sp, color: Colors.white))),
                 Row(
                     children: _card.images.map((url) {
-                  int index = _card.images.indexOf(url);
+                  final index = _card.images.indexOf(url);
                   return Container(
                     width: 6.w,
                     height: 6.h,
