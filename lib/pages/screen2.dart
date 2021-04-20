@@ -1,8 +1,10 @@
-import 'package:fl_blueprint/app/app_resouces.dart';
-import 'package:fl_blueprint/widgets/screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/size_extension.dart';
 
+import '../app/app_resouces.dart';
+import '../widgets/screen_widget.dart';
+
+/// Screen 2 page
 class Screen2 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -22,7 +24,7 @@ class Screen2 extends StatelessWidget {
                       ),
                       SizedBox(height: 20.h),
                       Text(
-                        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis praesent lorem egestas tellus orci leo.',
+                        '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mattis praesent lorem egestas tellus orci leo.''',
                         style: regularSFTextStyle(
                             size: 14.sp, color: Colors.white),
                       ),
@@ -38,14 +40,15 @@ class Screen2 extends StatelessWidget {
                       SizedBox(height: 24.h),
                       Container(height: 0.5.h, color: Color(0x777E7E7E)),
                       SizedBox(height: 40.h),
-                                            Image.network('https://bosat.vn/gallery/rong-3.jpg',
+                      Image.network('https://bosat.vn/gallery/rong-3.jpg',
                           height: 164.h,
                           width: double.infinity,
                           fit: BoxFit.fill),
-                                                SizedBox(height: 24.h),
+                      SizedBox(height: 24.h),
                       _buildText(1, 'A sodales et purus leo.'),
                       _buildText(2, 'Est lorem.'),
-                      _buildText(3, 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper amet viverra non justo a morbi blandit.'),
+                      _buildText(3,
+                          '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. Semper amet viverra non justo a morbi blandit.'''),
                       _buildText(4, 'Lacinia nunc curabitur velit.'),
                       _buildText(5, 'Lacinia non.'),
                       _buildText(5, 'Diam ac molestie.'),
@@ -57,16 +60,13 @@ class Screen2 extends StatelessWidget {
   Widget _buildText(int number, String text) {
     return Container(
         margin: EdgeInsets.only(top: 20.h),
-        child: Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+        child: Row(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Text('${number.toString()}.',
               style: regularSFTextStyle(color: Colors.white, size: 13.sp)),
           SizedBox(width: 12.w),
           Flexible(
-            child: Text(text,
-                style: regularSFTextStyle(color: Colors.white, size: 13.sp))
-          ),
+              child: Text(text,
+                  style: regularSFTextStyle(color: Colors.white, size: 13.sp))),
         ]));
   }
 }

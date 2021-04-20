@@ -1,21 +1,28 @@
 import 'package:domain/domain.dart';
-import 'package:fl_blueprint/app/app_router.dart';
-import 'package:fl_blueprint/services/navigation_service.dart';
-import 'package:fl_blueprint/services/dialog_service.dart';
-import 'package:fl_blueprint/view_models/base/base_viewmodel.dart';
+import 'package:flutter/material.dart';
+
+import '../app/app_router.dart';
+import '../services/dialog_service.dart';
+import '../services/navigation_service.dart';
+import 'base/base_viewmodel.dart';
 
 
-// Presentation logic
+/// {@template components_view_model}
+/// A view model to manage the presentation logic for [ComponentsPage]
+/// {@endtemplate}
 class ComponentsViewModel extends BaseViewModel {
-  // Use cases
+  /// [FetchComponentsUseCase] use for fetching component collection
   final FetchComponentsUseCase _fetchComponentsUseCase;
 
+  /// {@marco components_view_model}
   ComponentsViewModel(NavigationService navigationService,
       DialogService dialogService, this._fetchComponentsUseCase)
       : super(navigationService, dialogService);
 
+  /// Collection of component
   List<Component> components = [];
 
+  /// Initialize data at the first time
   Future initialize() async {
     try {
       dialogService.showLoading();
@@ -24,15 +31,16 @@ class ComponentsViewModel extends BaseViewModel {
       components = [...result];
       notifyListeners();
 
-    } catch (e) {
-      //Log error
+    } on Exception catch (e) {
+      // Log error
+      debugPrint(e.toString());
     }
     finally {
       dialogService.hideLoading();
     }
   }
 
-  // Commands
+  /// Open a webview with a url
   void openUrl(String url){
     if(url.isNotEmpty) {
       navigationService.pushNamed(AppRoute.inAppWebViewPage,args: url);

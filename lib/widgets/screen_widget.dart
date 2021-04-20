@@ -1,21 +1,26 @@
-
 import 'package:flutter/material.dart';
 
-
+/// Base screen
 class ScreenWidget extends StatelessWidget {
+  /// Constructor
   const ScreenWidget(
       {Key key,
         this.body,
         this.backgroundColor,
         this.bottomNavigationBar,
-        this.unFocus,
+        this.unfocus,
         this.isShowBackground})
       : super(key: key);
 
+  /// `body` a child widget as body
   final Widget body;
+  /// `backgroundColor` to define full color of background
   final Color backgroundColor;
+  /// `bottomNavigationBar` a bottom navigation bar
   final Widget bottomNavigationBar;
-  final Function() unFocus;
+  /// `unfocus` remove focus of any childs
+  final Function() unfocus;
+  /// `isShowBackground` condition to show or hide background color
   final bool isShowBackground;
 
   @override
@@ -23,8 +28,8 @@ class ScreenWidget extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         FocusScope.of(context).unfocus();
-        if (unFocus != null) {
-          unFocus();
+        if (unfocus != null) {
+          unfocus();
         }
       },
       child: Scaffold(

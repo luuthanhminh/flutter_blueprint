@@ -1,16 +1,23 @@
-import 'package:fl_blueprint/pages/cards_page.dart';
-import 'package:fl_blueprint/pages/components_page.dart';
-import 'package:fl_blueprint/pages/in_app_browser_page.dart';
-import 'package:fl_blueprint/pages/screen2.dart';
-import 'package:fl_blueprint/pages/splash_page.dart';
 import 'package:flutter/material.dart';
 
+import '../pages/cards_page.dart';
+import '../pages/components_page.dart';
+import '../pages/in_app_browser_page.dart';
+import '../pages/screen2.dart';
+import '../pages/splash_page.dart';
+
+/// Manage all routes in the application
 class AppRoute {
+  /// Card Page route
   static const cardsPage = '/cards';
+  /// Screen2 Page route
   static const screen2Page = '/screen2';
+  /// Component Page route
   static const componentsPage = '/components';
+  /// InAppWebView Page route
   static const inAppWebViewPage = '/webview';
 
+  /// App router generation
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case cardsPage:
@@ -24,7 +31,6 @@ class AppRoute {
             builder: (_) => InAppWebViewExampleScreen(settings.arguments));
       default:
         return MaterialPageRoute(builder: (_) => SplashPage());
-        ;
     }
   }
 }

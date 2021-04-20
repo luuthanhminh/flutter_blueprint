@@ -12,8 +12,7 @@ import 'cards_viewmodel_test.mocks.dart';
 @GenerateMocks([NavigationService])
 @GenerateMocks([DialogService])
 @GenerateMocks([FetchCardsUseCase])
-void main(){
-
+void main() {
   MockDialogService mockDialogService;
   MockFetchCardsUseCase mockFetchCardsUseCase;
   MockNavigationService mockNavigationService;
@@ -22,19 +21,24 @@ void main(){
       mockNavigationService = MockNavigationService();
       mockFetchCardsUseCase = MockFetchCardsUseCase();
       mockDialogService = MockDialogService();
-      
+
       when(mockDialogService.showLoading()).thenAnswer((_) async {});
-      when(mockDialogService.hideLoading()).thenAnswer((_) { });
-      when(mockNavigationService.pushNamed(any)).thenAnswer((_) async { });
+      when(mockDialogService.hideLoading()).thenAnswer((_) {});
+      when(mockNavigationService.pushNamed(any))
+          .thenAnswer((_) => Future.value());
     });
     test('Should have cards if fetching cards success', () async {
       // Arrange
-      final cardsViewModel = CardsViewModel(mockNavigationService, mockDialogService, mockFetchCardsUseCase);
+      final cardsViewModel = CardsViewModel(
+          mockNavigationService, mockDialogService, mockFetchCardsUseCase);
       when(mockFetchCardsUseCase.perform()).thenAnswer((_) async {
-        final cards = [Card(header: '', description: '', images: []), Card(header: '', description: '', images: [])];
+        final cards = [
+          Card(header: '', description: '', images: []),
+          Card(header: '', description: '', images: [])
+        ];
         return cards;
       });
-      
+
       // Act
       await cardsViewModel.initialize();
 
@@ -43,9 +47,10 @@ void main(){
     });
     test('Should have no cards if fetching cards throws exception', () async {
       // Arrange
-      final cardsViewModel = CardsViewModel(mockNavigationService, mockDialogService, mockFetchCardsUseCase);
+      final cardsViewModel = CardsViewModel(
+          mockNavigationService, mockDialogService, mockFetchCardsUseCase);
       when(mockFetchCardsUseCase.perform()).thenThrow(Exception());
-      
+
       // Act
       await cardsViewModel.initialize();
 
@@ -53,23 +58,30 @@ void main(){
       expect(cardsViewModel.cards.length, 0);
     });
 
-    test('Should navigation to Screen 2 when navigateToScreen2 function is excuted', () async {
+    test(
+        '''Should navigation to Screen 2 when navigateToScreen2 function is excuted''',
+        () async {
       // Arrange
-      final cardsViewModel = CardsViewModel(mockNavigationService, mockDialogService, mockFetchCardsUseCase);
+      final cardsViewModel = CardsViewModel(
+          mockNavigationService, mockDialogService, mockFetchCardsUseCase);
       // Act
       cardsViewModel.navigateToScreen2();
 
       // Assert
       verify(mockNavigationService.pushNamed(AppRoute.screen2Page)).called(1);
     });
-    test('Should navigation to Components Page when navigateToComponentsPage function is excuted', () async {
+    test(
+        '''Should navigation to Components Page when navigateToComponentsPage function is excuted''',
+        () async {
       // Arrange
-      final cardsViewModel = CardsViewModel(mockNavigationService, mockDialogService, mockFetchCardsUseCase);
+      final cardsViewModel = CardsViewModel(
+          mockNavigationService, mockDialogService, mockFetchCardsUseCase);
       // Act
       cardsViewModel.navigateToComponentsPage();
 
       // Assert
-      verify(mockNavigationService.pushNamed(AppRoute.componentsPage)).called(1);
+      verify(mockNavigationService.pushNamed(AppRoute.componentsPage))
+          .called(1);
     });
   });
 }

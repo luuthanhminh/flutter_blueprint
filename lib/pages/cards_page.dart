@@ -1,22 +1,21 @@
-import 'package:fl_blueprint/app/app_resouces.dart';
-import 'package:fl_blueprint/app/setup_locator.dart';
-import 'package:fl_blueprint/view_models/cards_viewmodel.dart';
-import 'package:fl_blueprint/widgets/screen_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_hooks/flutter_hooks.dart';
 import 'package:hooks_riverpod/hooks_riverpod.dart';
 import 'package:flutter_screenutil/size_extension.dart';
 import 'package:carousel_slider/carousel_slider.dart';
-import 'package:domain/domain.dart' as Domain;
+import 'package:domain/domain.dart' as domain;
 
-// Providers
+import '../app/app_resouces.dart';
+import '../app/setup_locator.dart';
+import '../view_models/cards_viewmodel.dart';
+import '../widgets/screen_widget.dart';
+
+/// Define providers to use for Card page
 final cardsViewModelProvider =
     AutoDisposeChangeNotifierProvider((ref) => locator.get<CardsViewModel>());
 
+/// Card page widget
 class CardsPage extends HookWidget {
-  final cardsProvider =
-      Provider.autoDispose((ref) => ref.watch(cardsViewModelProvider).cards);
-
   @override
   Widget build(BuildContext context) {
     useEffect(() {
@@ -26,115 +25,125 @@ class CardsPage extends HookWidget {
       });
       return;
     }, []);
+    debugPrint('CardsPage builder');
     return ScreenWidget(
         backgroundColor: Color(0xFF141D28),
-        body: HookBuilder(builder: (ctx) {
-          final cards = useProvider(cardsProvider);
-          return Container(
-              padding: EdgeInsets.only(top: 30.h),
-              child: SingleChildScrollView(
-                  physics: ScrollPhysics(),
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        ListView.builder(
-                            itemCount: cards.length,
-                            physics: NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            itemBuilder: (_, index) {
-                              final card = cards[index];
-                              if (card.images.length > 1) {
-                                return CarouselCardItemView(card);
-                              } else {
-                                return SingleCardItemView(card);
-                              }
-                            }),
-                        SizedBox(height: 24.h),
-                        Container(
-                          padding: EdgeInsets.only(left: 24.w),
-                          child: Text(
-                            'Sollicitudin in tortor.',
-                            style: regularSFTextStyle(
-                                size: 24.sp, color: Colors.white),
-                          ),
+        body: Container(
+            padding: EdgeInsets.only(top: 30.h),
+            child: SingleChildScrollView(
+                physics: ScrollPhysics(),
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      _ListCard(),
+                      SizedBox(height: 24.h),
+                      Container(
+                        padding: EdgeInsets.only(left: 24.w),
+                        child: Text(
+                          'Sollicitudin in tortor.',
+                          style: regularSFTextStyle(
+                              size: 24.sp, color: Colors.white),
                         ),
-                        Container(
-                          padding: EdgeInsets.only(
-                              left: 24.w, top: 16.h, right: 24.w),
-                          child: Text(
-                            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Platea sollicitudin platea habitant senectus. Placerat.',
-                            style: regularSFTextStyle(
-                                size: 13.sp, color: Color(0xFFA0AEBB)),
-                          ),
+                      ),
+                      Container(
+                        padding:
+                            EdgeInsets.only(left: 24.w, top: 16.h, right: 24.w),
+                        child: Text(
+                          '''Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                          Platea sollicitudin platea habitant senectus. Placerat.''',
+                          style: regularSFTextStyle(
+                              size: 13.sp, color: Color(0xFFA0AEBB)),
                         ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: 24.w, top: 16.h, right: 24.w),
-                          height: 50.h,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3.r),
-                              border: Border.all(
-                                color: Color(0x777E7E7E),
-                              )),
-                          child: InkWell(
-                              onTap: () {
-                                ctx
-                                    .read(cardsViewModelProvider)
-                                    .navigateToScreen2();
-                              },
-                              child: Container(
-                                  padding:
-                                      EdgeInsets.only(left: 15.w, right: 15.w),
-                                  child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                            child: Text('Egestas scleri',
-                                                style: regularSFTextStyle(
-                                                    size: 13.sp,
-                                                    color: Colors.white))),
-                                        Image.asset(AppIcons.icArrow)
-                                      ]))),
-                        ),
-                        Container(
-                          margin: EdgeInsets.only(
-                              left: 24.w, top: 16.h, right: 24.w, bottom: 30.h),
-                          height: 50.h,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(3.r),
-                              border: Border.all(
-                                color: Color(0x777E7E7E),
-                              )),
-                          child: InkWell(
-                              onTap: () {
-                                ctx
-                                    .read(cardsViewModelProvider)
-                                    .navigateToComponentsPage();
-                              },
-                              child: Container(
-                                  padding:
-                                      EdgeInsets.only(left: 15.w, right: 15.w),
-                                  child: Row(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.center,
-                                      children: [
-                                        Expanded(
-                                            child: Text('Consectur',
-                                                style: regularSFTextStyle(
-                                                    size: 13.sp,
-                                                    color: Colors.white))),
-                                        Image.asset(AppIcons.icArrow)
-                                      ]))),
-                        )
-                      ])));
-        }));
+                      ),
+                      Container(
+                        margin:
+                            EdgeInsets.only(left: 24.w, top: 16.h, right: 24.w),
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3.r),
+                            border: Border.all(
+                              color: Color(0x777E7E7E),
+                            )),
+                        child: InkWell(
+                            onTap: () {
+                              context
+                                  .read(cardsViewModelProvider)
+                                  .navigateToScreen2();
+                            },
+                            child: Container(
+                                padding:
+                                    EdgeInsets.only(left: 15.w, right: 15.w),
+                                child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                          child: Text('Egestas scleri',
+                                              style: regularSFTextStyle(
+                                                  size: 13.sp,
+                                                  color: Colors.white))),
+                                      Image.asset(AppIcons.icArrow)
+                                    ]))),
+                      ),
+                      Container(
+                        margin: EdgeInsets.only(
+                            left: 24.w, top: 16.h, right: 24.w, bottom: 30.h),
+                        height: 50.h,
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(3.r),
+                            border: Border.all(
+                              color: Color(0x777E7E7E),
+                            )),
+                        child: InkWell(
+                            onTap: () {
+                              context
+                                  .read(cardsViewModelProvider)
+                                  .navigateToComponentsPage();
+                            },
+                            child: Container(
+                                padding:
+                                    EdgeInsets.only(left: 15.w, right: 15.w),
+                                child: Row(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
+                                    children: [
+                                      Expanded(
+                                          child: Text('Consectur',
+                                              style: regularSFTextStyle(
+                                                  size: 13.sp,
+                                                  color: Colors.white))),
+                                      Image.asset(AppIcons.icArrow)
+                                    ]))),
+                      )
+                    ]))));
   }
 }
 
-class SingleCardItemView extends StatelessWidget {
-  final Domain.Card _card;
-  SingleCardItemView(this._card);
+class _ListCard extends HookWidget {
+  final cardsProvider =
+      Provider.autoDispose((ref) => ref.watch(cardsViewModelProvider).cards);
+  @override
+  Widget build(BuildContext context) {
+    final cards = useProvider(cardsProvider);
+    debugPrint('_ListCard builder');
+    return ListView.builder(
+        itemCount: cards.length,
+        physics: NeverScrollableScrollPhysics(),
+        shrinkWrap: true,
+        itemBuilder: (_, index) {
+          final card = cards[index];
+          if (card.images.length > 1) {
+            return _CarouselCardItemView(card);
+          } else {
+            return _SingleCardItemView(card);
+          }
+        });
+  }
+}
+
+class _SingleCardItemView extends StatelessWidget {
+  final domain.Card _card;
+  _SingleCardItemView(this._card);
 
   @override
   Widget build(BuildContext context) {
@@ -175,17 +184,17 @@ class SingleCardItemView extends StatelessWidget {
   }
 }
 
-class CarouselCardItemView extends StatefulWidget {
-  final Domain.Card _card;
-  CarouselCardItemView(this._card);
+class _CarouselCardItemView extends StatefulWidget {
+  final domain.Card _card;
+  _CarouselCardItemView(this._card);
   @override
   State<StatefulWidget> createState() {
     return _CarouselCardItemViewState(_card);
   }
 }
 
-class _CarouselCardItemViewState extends State<CarouselCardItemView> {
-  final Domain.Card _card;
+class _CarouselCardItemViewState extends State<_CarouselCardItemView> {
+  final domain.Card _card;
   int _indicatorCurrentIndex = 0;
   _CarouselCardItemViewState(this._card);
 

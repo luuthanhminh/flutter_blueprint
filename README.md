@@ -2,6 +2,8 @@
 
 Flutter Architecture Blueprint is a project that combines Clean Architecture with MVVM pattern to develop Flutter apps.
 
+[![style: effective dart](https://img.shields.io/badge/style-effective_dart-40c4ff.svg)](https://pub.dev/packages/effective_dart)
+
 ## Documentation
 
 - [Install Flutter](https://flutter.dev/get-started/)
