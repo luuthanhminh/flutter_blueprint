@@ -7,8 +7,8 @@ import 'package:flutter/animation.dart';
 class FadingCircle extends StatefulWidget {
   /// {@marco fading_circle}
   const FadingCircle({
-    Key key,
-    this.color,
+    Key? key,
+    this.color = Colors.white,
     this.size = 50.0,
     this.itemBuilder,
     this.duration = const Duration(milliseconds: 1200),
@@ -27,13 +27,13 @@ class FadingCircle extends StatefulWidget {
   final double size;
 
   /// A child widget
-  final IndexedWidgetBuilder itemBuilder;
+  final IndexedWidgetBuilder? itemBuilder;
 
   /// A duration of animation
   final Duration duration;
 
   /// Animation controler
-  final AnimationController controller;
+  final AnimationController? controller;
 
   @override
   _FadingCircleState createState() => _FadingCircleState();
@@ -55,7 +55,7 @@ class _FadingCircleState extends State<FadingCircle>
     -0.2,
     -0.1
   ];
-  AnimationController _controller;
+  AnimationController? _controller;
 
   @override
   void initState() {
@@ -68,7 +68,12 @@ class _FadingCircleState extends State<FadingCircle>
 
   @override
   void dispose() {
-    _controller.dispose();
+    // ignore: unnecessary_this
+    final controller = this._controller;
+    if (controller != null) {
+      _controller!.dispose();
+    }
+
     super.dispose();
   }
 
@@ -89,7 +94,7 @@ class _FadingCircleState extends State<FadingCircle>
                   alignment: Alignment.center,
                   child: FadeTransition(
                     opacity: DelayTween(begin: 0.0, end: 1.0, delay: delays[i])
-                        .animate(_controller),
+                        .animate(_controller!),
                     child: SizedBox.fromSize(
                         size: Size.square(widget.size * 0.15),
                         child: _itemBuilder(i)),
@@ -104,7 +109,7 @@ class _FadingCircleState extends State<FadingCircle>
   }
 
   Widget _itemBuilder(int index) => widget.itemBuilder != null
-      ? widget.itemBuilder(context, index)
+      ? widget.itemBuilder!(context, index)
       : DecoratedBox(
           decoration:
               BoxDecoration(color: widget.color, shape: BoxShape.circle));
@@ -113,7 +118,7 @@ class _FadingCircleState extends State<FadingCircle>
 /// `DelayTween` an custom interpolaration based on Tween
 class DelayTween extends Tween<double> {
   /// Constructor
-  DelayTween({double begin, double end, @required this.delay})
+  DelayTween({double? begin, double? end, required this.delay})
       : super(begin: begin, end: end);
 
   /// Delay time intervale

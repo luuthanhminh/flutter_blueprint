@@ -17,7 +17,7 @@ class InAppWebViewExampleScreen extends StatefulWidget {
 }
 
 class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
-  InAppWebViewController webView;
+  InAppWebViewController? webView;
   final String _url;
   bool _showLoading = true;
   _InAppWebViewExampleScreenState(this._url);
@@ -54,12 +54,10 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
               decoration:
                   BoxDecoration(border: Border.all(color: Colors.blueAccent)),
               child: InAppWebView(
-                initialUrl: _url,
+                initialUrlRequest: URLRequest(url: Uri.parse(_url)),
                 // initialFile: "assets/index.html",
-                initialHeaders: {},
                 initialOptions: InAppWebViewGroupOptions(
                   crossPlatform: InAppWebViewOptions(
-                    debuggingEnabled: true,
                     useShouldOverrideUrlLoading: true,
                   ),
                 ),
@@ -70,8 +68,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
 
                 shouldOverrideUrlLoading:
                     (controller, shouldOverrideUrlLoadingRequest) async {
-                  var url = shouldOverrideUrlLoadingRequest.url;
-                  var uri = Uri.parse(url);
+                  var uri = shouldOverrideUrlLoadingRequest.request.url!;
 
                   if (![
                     "http",
@@ -82,17 +79,17 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
                     "javascript",
                     "about"
                   ].contains(uri.scheme)) {
-                    if (await canLaunch(url)) {
+                    if (await canLaunch(_url)) {
                       // Launch the App
                       await launch(
-                        url,
+                        _url,
                       );
                       // and cancel the request
-                      return ShouldOverrideUrlLoadingAction.CANCEL;
+                      return NavigationActionPolicy.CANCEL;
                     }
                   }
 
-                  return ShouldOverrideUrlLoadingAction.ALLOW;
+                  return NavigationActionPolicy.ALLOW;
                 },
                 onLoadStop: (controller, url) async {
                   print("onLoadStop $url");

@@ -13,9 +13,9 @@ import 'components_viewmodel_test.mocks.dart';
 @GenerateMocks([DialogService])
 @GenerateMocks([FetchComponentsUseCase])
 void main() {
-  MockDialogService mockDialogService;
-  MockFetchComponentsUseCase mockFetchComponentsUseCase;
-  MockNavigationService mockNavigationService;
+  var mockDialogService = MockDialogService();
+  var mockFetchComponentsUseCase = MockFetchComponentsUseCase();
+  var mockNavigationService = MockNavigationService();
   group('Components ViewModel', () {
     setUpAll(() async {
       mockNavigationService = MockNavigationService();

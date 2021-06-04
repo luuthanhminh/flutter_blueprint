@@ -13,27 +13,29 @@ class AppIcons {
 const String fontFamily = 'Roboto';
 
 /// Font bold
-TextStyle boldSFTextStyle({double size, Color color, double height}) =>
+TextStyle boldSFTextStyle({double? size, Color? color, double? height}) =>
     TextStyle(
         fontFamily: fontFamily,
         fontWeight: FontWeight.w700,
-        fontSize: size,
+        fontSize: size ?? 14,
         color: color ?? Colors.black,
         height: height);
 
 /// Font regular
-TextStyle regularSFTextStyle({double size, Color color, double height}) =>
+TextStyle regularSFTextStyle({double? size, Color? color, double? height}) =>
     TextStyle(
       fontFamily: fontFamily,
       fontWeight: FontWeight.w300,
-      fontSize: size,
+      fontSize: size ?? 14,
       color: color ?? Colors.black,
-      height: height,);
+      height: height,
+    );
+
 /// Font medium
-TextStyle mediumSFTextStyle({double size, Color color, double height}) =>
+TextStyle mediumSFTextStyle({double? size, Color? color, double? height}) =>
     TextStyle(
         fontFamily: fontFamily,
         fontWeight: FontWeight.w500,
-        fontSize: size,
+        fontSize: size ?? 14,
         color: color ?? Colors.black,
         height: height);

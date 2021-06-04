@@ -5,9 +5,5 @@ class Card {
   String description;
   List<String> images;
 
-  Card({
-    @required this.header,
-    @required this.description,
-    @required this.images
-  });
+  Card({required this.header, required this.description, required this.images});
 }

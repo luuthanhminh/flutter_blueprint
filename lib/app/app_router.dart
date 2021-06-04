@@ -10,15 +10,18 @@ import '../pages/splash_page.dart';
 class AppRoute {
   /// Card Page route
   static const cardsPage = '/cards';
+
   /// Screen2 Page route
   static const screen2Page = '/screen2';
+
   /// Component Page route
   static const componentsPage = '/components';
+
   /// InAppWebView Page route
   static const inAppWebViewPage = '/webview';
 
   /// App router generation
-  static Route<dynamic> generateRoute(RouteSettings settings) {
+  static Route<Object>? generateRoute(RouteSettings settings) {
     switch (settings.name) {
       case cardsPage:
         return MaterialPageRoute(builder: (_) => CardsPage());
@@ -28,7 +31,8 @@ class AppRoute {
         return MaterialPageRoute(builder: (_) => ComponentsPage());
       case inAppWebViewPage:
         return MaterialPageRoute(
-            builder: (_) => InAppWebViewExampleScreen(settings.arguments));
+            builder: (_) =>
+                InAppWebViewExampleScreen(settings.arguments as String));
       default:
         return MaterialPageRoute(builder: (_) => SplashPage());
     }

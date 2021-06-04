@@ -13,9 +13,9 @@ import 'cards_viewmodel_test.mocks.dart';
 @GenerateMocks([DialogService])
 @GenerateMocks([FetchCardsUseCase])
 void main() {
-  MockDialogService mockDialogService;
-  MockFetchCardsUseCase mockFetchCardsUseCase;
-  MockNavigationService mockNavigationService;
+  var mockDialogService = MockDialogService();
+  var mockFetchCardsUseCase = MockFetchCardsUseCase();
+  var mockNavigationService = MockNavigationService();
   group('Cards ViewModel', () {
     setUpAll(() async {
       mockNavigationService = MockNavigationService();

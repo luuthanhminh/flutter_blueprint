@@ -31,14 +31,17 @@ class DialogServiceImpl implements DialogService {
   @override
   Future showLoading() async {
     _isShowLoading = true;
-    await showDialog(
-        context: NavigationService.navigationKey.currentContext,
-        builder: (_) {
-          return Container(
-              child: FadingCircle(
-            color: Colors.blueAccent,
-            size: 50.0,
-          ));
-        });
+    final currentContext = NavigationService.navigationKey.currentContext;
+    if (currentContext != null) {
+      await showDialog(
+          context: currentContext,
+          builder: (_) {
+            return Container(
+                child: FadingCircle(
+              color: Colors.blueAccent,
+              size: 50.0,
+            ));
+          });
+    }
   }
 }

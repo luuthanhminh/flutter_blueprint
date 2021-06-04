@@ -10,7 +10,7 @@ CardModel _$CardModelFromJson(Map<String, dynamic> json) {
   return CardModel(
     header: json['header'] as String,
     description: json['description'] as String,
-    images: (json['images'] as List)?.map((e) => e as String)?.toList(),
+    images: (json['images'] as List<dynamic>).map((e) => e as String).toList(),
   );
 }
 
