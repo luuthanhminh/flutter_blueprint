@@ -15,6 +15,7 @@ Flutter Architecture Blueprint is a project that follows Clean Architecture prin
 - [mockito (Unit testing)](https://pub.dev/packages/mockito)
 - [code style (Effective Dart)](https://dart.dev/guides/language/effective-dart)
 - [data model (Freezed)](https://pub.dev/packages/freezed)
+- [StatefullWidget replacement (Flutter Hooks)](https://pub.dev/packages/flutter_hooks)
 
 ## Requirements
 
