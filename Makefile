@@ -12,7 +12,6 @@ setup:
 
 .PHONY: build-runner
 build-runner:
-	cd $(data_module) && flutter pub run build_runner build --delete-conflicting-outputs
 	cd $(current_dir) && flutter pub run build_runner build --delete-conflicting-outputs
 
 .PHONY: run
@@ -26,3 +25,16 @@ build-apk:
 .PHONY: test
 test:
 	cd $(current_dir) && flutter test
+
+# SOURCES = ./lib/src
+# EXPORT_FILE=./lib/domain.dart
+# array := $(shell find $(SOURCES) -name '*.dart' | sed -e 's/.\/lib\///g')
+
+# build:
+# 	rm -f $(EXPORT_FILE)
+# 	touch $(EXPORT_FILE)
+# 	echo "library domain;" >> $(EXPORT_FILE)
+# 	@for f in $(array); \
+# 	do \
+# 		echo "export '$${f}';" >> $(EXPORT_FILE); \
+# 	done \

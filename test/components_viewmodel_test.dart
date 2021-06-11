@@ -1,8 +1,8 @@
-import 'package:domain/domain.dart';
-import 'package:fl_blueprint/app/app_router.dart';
-import 'package:fl_blueprint/services/dialog_service.dart';
-import 'package:fl_blueprint/services/navigation_service.dart';
-import 'package:fl_blueprint/view_models/components_viewmodel.dart';
+import 'package:fl_blueprint/app/core/app_router.dart';
+import 'package:fl_blueprint/app/services/dialog_service.dart';
+import 'package:fl_blueprint/app/services/navigation_service.dart';
+import 'package:fl_blueprint/app/view_models/view_models.dart';
+import 'package:fl_blueprint/domain/domain.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -45,7 +45,7 @@ void main() {
       await componentsViewModel.initialize();
 
       // Assert
-      expect(componentsViewModel.components.length, 2);
+      expect(componentsViewModel.debugState.components.length, 2);
     });
     test('Should have no components if fetching componenets throws exception',
         () async {
@@ -58,7 +58,7 @@ void main() {
       await componentsViewModel.initialize();
 
       // Assert
-      expect(componentsViewModel.components.length, 0);
+      expect(componentsViewModel.debugState.components.length, 0);
     });
     test('Should navigate to In-app browser if url is not empty', () async {
       // Arrange

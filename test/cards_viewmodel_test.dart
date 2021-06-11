@@ -1,8 +1,8 @@
-import 'package:domain/domain.dart';
-import 'package:fl_blueprint/app/app_router.dart';
-import 'package:fl_blueprint/services/dialog_service.dart';
-import 'package:fl_blueprint/services/navigation_service.dart';
-import 'package:fl_blueprint/view_models/cards_viewmodel.dart';
+import 'package:fl_blueprint/app/core/app_router.dart';
+import 'package:fl_blueprint/app/services/dialog_service.dart';
+import 'package:fl_blueprint/app/services/navigation_service.dart';
+import 'package:fl_blueprint/app/view_models/view_models.dart';
+import 'package:fl_blueprint/domain/domain.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
@@ -33,8 +33,8 @@ void main() {
           mockNavigationService, mockDialogService, mockFetchCardsUseCase);
       when(mockFetchCardsUseCase.perform()).thenAnswer((_) async {
         final cards = [
-          Card(header: '', description: '', images: []),
-          Card(header: '', description: '', images: [])
+          DCard(header: '', description: '', images: []),
+          DCard(header: '', description: '', images: [])
         ];
         return cards;
       });
@@ -43,7 +43,7 @@ void main() {
       await cardsViewModel.initialize();
 
       // Assert
-      expect(cardsViewModel.cards.length, 2);
+      expect(cardsViewModel.debugState.cards.length, 2);
     });
     test('Should have no cards if fetching cards throws exception', () async {
       // Arrange
@@ -55,7 +55,7 @@ void main() {
       await cardsViewModel.initialize();
 
       // Assert
-      expect(cardsViewModel.cards.length, 0);
+      expect(cardsViewModel.debugState.cards.length, 0);
     });
 
     test(

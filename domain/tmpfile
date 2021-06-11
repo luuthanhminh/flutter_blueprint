@@ -1,7 +1,0 @@
-./lib/src/repositories/cards_repository.dart
-./lib/src/repositories/repositories.dart
-./lib/src/usecases/base_usecase.dart
-./lib/src/usecases/fetch_cards_usecase.dart
-./lib/src/usecases/usecases.dart
-./lib/src/entities/card.dart
-./lib/src/entities/entities.dart
