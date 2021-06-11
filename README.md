@@ -12,10 +12,13 @@ Flutter Architecture Blueprint is a project that follows Clean Architecture prin
 - [MVVM pattern](https://en.wikipedia.org/wiki/Model%E2%80%93view%E2%80%93viewmodel)
 - [Riverpod (State Management)](https://riverpod.dev/)
 - [get_it (Dependency Injection)](https://pub.dev/packages/get_it)
+- [mockito (Unit testing)](https://pub.dev/packages/mockito)
+- [code style (Effective Dart)](https://dart.dev/guides/language/effective-dart)
+- [data model (Freezed)](https://pub.dev/packages/freezed)
 
 ## Requirements
 
-- [Flutter <1.22.6](https://flutter.dev/docs/development/tools/sdk/releases)
+- [Flutter 2.2+](https://flutter.dev/docs/development/tools/sdk/releases)
 
 ## Environment
 
@@ -32,11 +35,11 @@ Flutter Architecture Blueprint is a project that follows Clean Architecture prin
 
 There are 3 main modules to help separate the code. They are Data, Domain, and Presentation.
    
-- **Data (Particular project)**: contains Local/Remote Data Source, APIs, Data objects (Request/Response object, DB objects), and the repository implementation.
+- **Data**: contains Local/Remote Data Source, APIs, Data objects (Request/Response object, DB objects), and the repository implementation.
    
-- **Domain (Particular project)**: contains UseCases, Domain Objects/Models, and Repository Interfaces
+- **Domain**: contains UseCases, Domain Objects/Models, and Repository Interfaces
    
-- **Presentation**: contains UI, app style, app configurations, View Model (hold view state and presentation logic), etc. Can be split into separate modules itself if needed. For example, we could have a module called Device which handles platform things such as camera, location, etc.
+- **Presentation**: contains UI, app style, app configurations, View Model (hold view state and presentation logic), etc.
 
 # Entities
  - Enterprise-wide business rules
