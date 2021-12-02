@@ -5,14 +5,13 @@ import 'package:fl_blueprint/app/view_models/base/base_viewmodel.dart';
 import 'package:fl_blueprint/domain/domain.dart';
 import 'package:fl_blueprint/setup.dart';
 import 'package:flutter/material.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'components_state.dart';
 
 
 /// Provider hold the logic for Components page
 final componentsViewModelProvider =
-    StateNotifierProvider.autoDispose<ComponentsViewModel, ComponentsState>(
+    StateNotifierProvider<ComponentsViewModel, ComponentsState>(
         (ref) => locator.get<ComponentsViewModel>());
 
 /// {@template components_view_model}

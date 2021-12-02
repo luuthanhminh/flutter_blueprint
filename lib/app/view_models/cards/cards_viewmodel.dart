@@ -2,18 +2,15 @@ import 'package:fl_blueprint/app/core/app_router.dart';
 import 'package:fl_blueprint/domain/domain.dart';
 import 'package:fl_blueprint/setup.dart';
 import 'package:flutter/foundation.dart';
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../services/dialog_service.dart';
 import '../../services/navigation_service.dart';
-
 import '../base/base_viewmodel.dart';
 import 'card_state.dart';
 
 /// Define providers to use for Card page
-final cardsViewModelProvider =
-    StateNotifierProvider.autoDispose<CardsViewModel, CardState>(
-        (ref) => locator.get<CardsViewModel>());
+final cardsViewModelProvider = StateNotifierProvider<CardsViewModel, CardState>(
+    (ref) => locator.get<CardsViewModel>());
 
 /// {@template cards_view_model}
 /// A view model to manage the presentation logic for [CardsPage]

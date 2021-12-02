@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'core/app_router.dart';
 import 'services/navigation_service.dart';
 
@@ -14,6 +13,7 @@ class MyApp extends StatelessWidget {
         builder: () {
           return MaterialApp(
               title: 'Carousel Demo',
+              debugShowCheckedModeBanner: false,
               theme: ThemeData(
                 primarySwatch: Colors.blue,
                 visualDensity: VisualDensity.adaptivePlatformDensity,

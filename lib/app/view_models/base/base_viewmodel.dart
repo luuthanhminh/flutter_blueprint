@@ -1,5 +1,4 @@
-import 'package:hooks_riverpod/hooks_riverpod.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../services/dialog_service.dart';
 import '../../services/navigation_service.dart';
 
