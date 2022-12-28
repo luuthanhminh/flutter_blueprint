@@ -279,7 +279,7 @@ class _CarouselCardItemViewState extends State<_CarouselCardItemView> {
               );
             },
             options: CarouselOptions(
-                height: 588.h,
+                height: 589.h,
                 viewportFraction: 0.9,
                 scrollDirection: Axis.horizontal,
                 reverse: false,
