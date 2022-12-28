@@ -1,10 +1,8 @@
 import 'package:fl_blueprint/app/core/app_resouces.dart';
 import 'package:fl_blueprint/domain/domain.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import '../../view_models/cards/cards_viewmodel.dart';
 import '../../widgets/page_widget.dart';
 
