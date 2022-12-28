@@ -1,3 +1,4 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fl_blueprint/app/core/app_resouces.dart';
 import 'package:fl_blueprint/domain/domain.dart';
 import 'package:flutter/material.dart';
