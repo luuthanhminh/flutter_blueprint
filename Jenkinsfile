@@ -43,7 +43,6 @@ pipeline {
                     }
                     withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV_BLUEPRINT')]) {
                         sh "sudo cp ${ENV_BLUEPRINT} $WORKSPACE/android/fastlane/.env"
-                        sh "ls -la android"
                     }
 
                     sh "fvm flutter pub get"

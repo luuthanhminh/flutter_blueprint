@@ -1,0 +1,54 @@
+
+def publishedUrl = ""
+def webhookUrl = ""
+
+pipeline {
+    agent { label 'macslave' }
+
+    environment {
+        PATH = "/opt/homebrew/bin:$PATH"
+        LANG = 'en_US.UTF-8'
+        LANGUAGE    = 'en_US.UTF-8'
+        LC_ALL    = 'en_US.UTF-8'
+        FVM_HOME = '/Users/Shared/fvm'
+    }
+
+    stages {
+        stage('Build & Publish') {
+            steps {
+                script {
+                    sh "fvm use 3.3.0"
+
+                    withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV_BLUEPRINT')]) {
+                        sh "sudo cp ${ENV_BLUEPRINT} $WORKSPACE/android/fastlane/.env"
+                    }
+
+                    sh "fvm flutter pub get"
+                    // sh "fvm flutter analyze"
+                    sh "fvm flutter test"
+
+                    // configFileProvider([configFile(fileId: '71d3722f-47e4-4adc-be51-79eedf0b279d', replaceTokens: true, targetLocation: 'vmscanner-config.json')]) {}
+                    // configFileProvider([configFile(fileId: '9ecf82be-1264-470a-99bb-49c64012c9d5', replaceTokens: true, targetLocation: 'export.plist')]) {}
+                    // // Get Apple Store Apikey
+                    // configFileProvider([configFile(fileId: 'a0857216-90f4-40c8-8991-e69899305190', replaceTokens: true, targetLocation: 'appstore_auth.json')]) {}
+                    // dir("ios") {
+                    //     withCredentials([file(credentialsId: 'vmscanner-appstore', variable: 'PROVISION'), file(credentialsId: 'vmscanner-cert', variable: 'CERTIFICATE')]) {
+                    //         def cfg = readJSON file:"$WORKSPACE/vmscanner-config.json"
+                    //         withEnv(["PROVISION_PATH=${PROVISION}", "CERTIFICATE_PATH=${CERTIFICATE}", "KEYCHAIN_PASSWORD=${cfg.keychainPassword}", "CERTIFICATE_PASSWORD=${cfg.certificatePassword}", "key_filepath=$WORKSPACE/appstore_auth.json"]) {
+                    //             sh "figlet Signing"
+                    //             // Remove existing profile if existed
+                    //             sh "fastlane sigh manage -p \"VM Scanner AppStore Distribution\" --force"
+                    //             sh "pod install"
+                    //             sh "fastlane config_app"
+                    //         }
+                    //     }
+                    // }
+                    // sh "flutter build ipa --release --export-options-plist $WORKSPACE/export.plist"
+                    sh "flutter build ipa --release"
+                    
+                }
+                
+            }
+        }
+    }
+}
