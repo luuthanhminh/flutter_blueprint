@@ -17,7 +17,6 @@ pipeline {
         stage('Build & Publish') {
             steps {
                 script {
-                    sh "fvm install 3.3.0"
                     sh "fvm use 3.3.0"
                     // configFileProvider([configFile(fileId: '06f0e9ba-5a4c-4411-8dfb-7985803c7f14', replaceTokens: true, targetLocation: 'firebase_cred.json')]) {}
                     // configFileProvider([configFile(fileId: '006115fe-0451-487b-b6c8-88028eb2c92c',  replaceTokens: true, targetLocation: 'firebaseConfig.json')]) {}
