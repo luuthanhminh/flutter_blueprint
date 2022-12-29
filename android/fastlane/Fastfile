@@ -36,6 +36,6 @@ platform :android do
     firebase_app_distribution(
         app: ENV["FIREBASE_APP_ANDROID_ID"],
         firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-        android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk"
+        android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk")
   end
 end
