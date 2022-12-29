@@ -35,8 +35,8 @@ pipeline {
                     //             sh "fastlane increment_version"
                     //     }
                     // }
-                    withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV')]) {
-                        sh "cp ${ENV} $WORKSPACE/android/fastlane/.env"
+                    withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV_BLUEPRINT')]) {
+                        sh "cp ${ENV_BLUEPRINT} $WORKSPACE/android/fastlane/.env"
                         sh "ls -la android"
                     }
                     withCredentials([file(credentialsId: 'flite_android_keystore', variable: 'KEYSTORE')]) {
