@@ -18,7 +18,7 @@ pipeline {
             steps {
                 script {
                     sh "fvm use 3.3.0"
-                    sh "fvm flutter pub get"
+                    
                     // def cfg = readJSON file:"$WORKSPACE/firebaseConfig.json"
                     // def testers = "${cfg.testers.join(',')}"
                     // writeFile file: "$WORKSPACE/testers.txt", text: testers.replace("\"", "")
@@ -45,6 +45,10 @@ pipeline {
                         sh "sudo cp ${ENV_BLUEPRINT} $WORKSPACE/android/fastlane/.env"
                         sh "ls -la android"
                     }
+
+                    sh "fvm flutter pub get"
+                    sh "fvm flutter analyze"
+                    sh "fvm flutter test"
 
                     dir("android") {
                         sh "fastlane increment_version"

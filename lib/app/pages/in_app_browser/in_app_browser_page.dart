@@ -79,14 +79,6 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
                     "javascript",
                     "about"
                   ].contains(uri.scheme)) {
-                    if (await canLaunch(_url)) {
-                      // Launch the App
-                      await launch(
-                        _url,
-                      );
-                      // and cancel the request
-                      return NavigationActionPolicy.CANCEL;
-                    }
                   }
 
                   return NavigationActionPolicy.ALLOW;

@@ -13,7 +13,7 @@ import '../../widgets/page_widget.dart';
 class ComponentsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(componentsViewModelProvider.notifier).initialize();
     });
     return PageWidget(
