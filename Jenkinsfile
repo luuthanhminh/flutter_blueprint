@@ -38,18 +38,18 @@ pipeline {
                     sh "ls -la android"
                     
                     withCredentials([file(credentialsId: 'flite_android_keystore', variable: 'KEYSTORE')]) {
-                        sh "cp ${KEYSTORE} $WORKSPACE/android/app/myapp-release-key.jks"
+                        sh "sudo cp ${KEYSTORE} $WORKSPACE/android/app/myapp-release-key.jks"
                         sh "ls -la android"
                     }
                     withCredentials([file(credentialsId: 'android_key_properties', variable: 'KEYPROPERTIES')]) {
-                        sh "cp ${KEYPROPERTIES} $WORKSPACE/android/key.properties"
+                        sh "sudo cp ${KEYPROPERTIES} $WORKSPACE/android/key.properties"
                         sh "ls -la android"
                     }
                     withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV_BLUEPRINT')]) {
-                        sh "cp ${ENV_BLUEPRINT} $WORKSPACE/android/fastlane/.env"
+                        sh "sudo cp ${ENV_BLUEPRINT} $WORKSPACE/android/fastlane/.env"
                         sh "ls -la android"
                     }
-                    
+
                     dir("android") {
                         sh "fastlane increment_version"
                     }
