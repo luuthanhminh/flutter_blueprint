@@ -35,6 +35,7 @@ pipeline {
                     //             sh "fastlane increment_version"
                     //     }
                     // }
+                    sh "ls -la android"
                     withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV_BLUEPRINT')]) {
                         sh "cp ${ENV_BLUEPRINT} $WORKSPACE/android/fastlane/.env"
                         sh "ls -la android"
