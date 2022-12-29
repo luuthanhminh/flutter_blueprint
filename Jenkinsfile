@@ -35,6 +35,10 @@ pipeline {
                     //             sh "fastlane increment_version"
                     //     }
                     // }
+                    withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV')]) {
+                        sh "cp ${ENV} $WORKSPACE/android/fastlane/.env"
+                        sh "ls -la android"
+                    }
                     withCredentials([file(credentialsId: 'flite_android_keystore', variable: 'KEYSTORE')]) {
                         sh "cp ${KEYSTORE} $WORKSPACE/android/app/myapp-release-key.jks"
                         sh "ls -la android"
@@ -43,7 +47,13 @@ pipeline {
                         sh "cp ${KEYPROPERTIES} $WORKSPACE/android/key.properties"
                         sh "ls -la android"
                     }
+                    dir("android") {
+                        sh "fastlane increment_version"
+                    }
                     sh "fvm flutter build apk --release"
+                    dir("android") {
+                        sh "fastlane distribute"
+                    }
                     // dir("android") {
                     //      withEnv(["GOOGLE_APPLICATION_CREDENTIALS=$WORKSPACE/firebase_cred.json", "FIREBASE_APP_ID=${firebaseAppId}", "TESTERS=$WORKSPACE/testers.txt", "RELEASE=$WORKSPACE/release.txt"]) {
                     //         // sh "figlet Publish to Firebase"
@@ -57,19 +67,6 @@ pipeline {
                 }
                 
             }
-        }
-    }
-    post { 
-        always { 
-            cleanWs()
-        }
-        success {
-            script {
-                def message = "New VM Scanner version is published to Firebase. Please check the link ${publishedUrl}"
-                println(message)
-                office365ConnectorSend message: message, status: 'Success', webhookUrl: webhookUrl
-            }
-            
         }
     }
 }

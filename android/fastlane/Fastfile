@@ -18,7 +18,7 @@ default_platform(:android)
 platform :android do
   lane :increment_version do
     latest_release = firebase_app_distribution_get_latest_release(
-      app: ENV["FIREBASE_APP_ID"],
+      app: ENV["FIREBASE_APP_ANDROID_ID"],
       firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]
     )
     if latest_release.nil?
@@ -33,13 +33,9 @@ platform :android do
   end
   desc "Firebase app distribution"
   lane :distribute do
-    puts ENV["TESTERS"]
     firebase_app_distribution(
-        app: ENV["FIREBASE_APP_ID"],
-        testers_file: ENV["TESTERS"],
-        service_credentials_file: ENV["GOOGLE_APPLICATION_CREDENTIALS"],
-        android_artifact_type: "APK",
-        android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk",
-        release_notes: ENV["RELEASE_NOTE"])
+        app: ENV["FIREBASE_APP_ANDROID_ID"],
+        firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+        android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk"
   end
 end
