@@ -3,23 +3,23 @@
 <plist version="1.0">
 <dict>
     <key>method</key>
-    <string>development</string>
-     <key>teamID</key>
-    <string>5LPVUWDHDS</string>
+    <string>app-store</string>
+     <key>_fBl</key>
+    <string>55U8F4999W</string>
 	<key>compileBitcode</key>
 	<true/>
     <key>uploadSymbols</key>
 	<true/>
     <key>signingCertificate</key>
-    <string>Apple Development: Duy Nguyen (JW4P84KFXQ)</string>
+    <string>iPhone Distribution: Fliteboard Pty Ltd (55U8F4999W)</string>
     <key>stripSwiftSymbols</key>
     <true/>
     <key>signingStyle</key>
     <string>manual</string>
     <key>provisioningProfiles</key>
     <dict>
-        <key>com.example.flBlueprint</key>
-        <string>AD_flBlueprint</string>
+        <key>com.fliteboard.fliteapp.dev</key>
+        <string>AS Fliteboard Dev</string>
     </dict>
     <key>thinning</key>
     <string>&lt;none&gt;</string>
