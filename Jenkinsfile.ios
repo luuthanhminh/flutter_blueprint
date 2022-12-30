@@ -44,6 +44,9 @@ pipeline {
                     //     }
                     // }
                     // sh "flutter build ipa --release --export-options-plist $WORKSPACE/export.plist"
+                    dir("ios") {
+                        sh "pod install"
+                    }
                     sh "fvm flutter build ipa --release"
                     
                 }
