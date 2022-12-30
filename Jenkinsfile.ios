@@ -56,7 +56,7 @@ pipeline {
                     // }
                     // sh "flutter build ipa --release --export-options-plist $WORKSPACE/export.plist"
                     dir("ios") {
-                        sh "- rm -rf Pods " 
+                        sh "rm -rf Pods " 
     sh "rm -rf Podfile.lock  "
     sh "pod update"
                         // sh "sudo fastlane run update_fastlane"
