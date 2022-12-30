@@ -31,9 +31,12 @@ pipeline {
                         sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/blueprint_Certificates.p12"
                     }
 
-                    sh "fvm flutter pub get"
+                    sh "fvm flutter clean"
+    sh "fvm flutter pub get"
+    sh "fvm flutter precache --ios"
+    
                     // sh "fvm flutter analyze"
-                    sh "fvm flutter test"
+                    // sh "fvm flutter test"
 
                     // configFileProvider([configFile(fileId: '71d3722f-47e4-4adc-be51-79eedf0b279d', replaceTokens: true, targetLocation: 'vmscanner-config.json')]) {}
                     // configFileProvider([configFile(fileId: '9ecf82be-1264-470a-99bb-49c64012c9d5', replaceTokens: true, targetLocation: 'export.plist')]) {}
@@ -53,7 +56,9 @@ pipeline {
                     // }
                     // sh "flutter build ipa --release --export-options-plist $WORKSPACE/export.plist"
                     dir("ios") {
-                        sh "pod install"
+                        sh "- rm -rf Pods " 
+    sh "rm -rf Podfile.lock  "
+    sh "pod update"
                         // sh "sudo fastlane run update_fastlane"
                         sh "sudo fastlane setupCodeSigningIos"
                     }
