@@ -38,6 +38,7 @@ end
 
 
 def setupCodeSigning(keychainPassword)
+  delete_keychain(name: "CI")
   create_keychain(
     name: "CI",
     password: keychainPassword,
