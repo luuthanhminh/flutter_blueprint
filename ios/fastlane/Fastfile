@@ -15,9 +15,43 @@
 
 default_platform(:ios)
 
+puts "Printing environment variables........."
+puts ENV.inspect
+
 platform :ios do
-  desc "Description of what the lane does"
-  lane :custom_lane do
-    # add actions here: https://docs.fastlane.tools/actions
+  desc "Push a new beta build to TestFlight"
+  lane :setupCodeSigningIos do
+    setupCodeSigning(ENV["KEYCHAIN_PASSWORD"])
+    install_provisioning_profile(path: ENV["AD_PROVISION_PATH"])
+    setupCodeCertificate(ENV["KEYCHAIN_PASSWORD"], ENV["CERTIFICATE_PASSWORD"], ENV["CERTIFICATE_PATH"])
   end
+  desc "Firebase app distribution"
+  lane :distribute do
+    firebase_app_distribution(
+        app: ENV["FIREBASE_APP_ID_IOS"],
+        firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+        ipa_path: "../build/ios/ipa/fliteboard_v2.ipa"
+    )
+  end
+end
+
+
+def setupCodeSigning(keychainPassword)
+  create_keychain(
+    name: "CI",
+    password: keychainPassword,
+    default_keychain: true,
+    unlock: true,
+    timeout: 3600,
+    lock_when_sleeps: false
+  )
+end
+
+def setupCodeCertificate(keychainPassword, certificatePassword, certificatePath)
+  import_certificate(
+    certificate_path: certificatePath,
+    certificate_password: certificatePassword,
+    keychain_name: "CI",
+    keychain_password: keychainPassword
+  )
 end
