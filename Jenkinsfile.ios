@@ -23,7 +23,13 @@ pipeline {
                         sh "sudo cp ${ENV_BLUEPRINT} $WORKSPACE/ios/fastlane/.env"
                     }
 
-                    
+                    withCredentials([file(credentialsId: 'AD_flBlueprint_mobileprovision', variable: 'mobileprovision')]) {
+                            sh "sudo cp ${mobileprovision} $WORKSPACE/ios/fastlane/AD_flBlueprint.mobileprovision"
+                    }
+
+                    withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
+                        sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/blueprint_Certificates.p12"
+                    }
 
                     sh "fvm flutter pub get"
                     // sh "fvm flutter analyze"
@@ -48,12 +54,6 @@ pipeline {
                     // sh "flutter build ipa --release --export-options-plist $WORKSPACE/export.plist"
                     dir("ios") {
                         sh "pod install"
-                        withCredentials([file(credentialsId: 'AD_flBlueprint_mobileprovision', variable: 'mobileprovision')]) {
-                            sh "sudo cp ${mobileprovision} $WORKSPACE/ios/fastlane/AD_flBlueprint.mobileprovision"
-                        }
-                        withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
-                            sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/blueprint_Certificates.p12"
-                        }
                         sh "fastlane setupCodeSigningIos"
                     }
                     sh "fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
