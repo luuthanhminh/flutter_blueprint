@@ -21,6 +21,7 @@ puts ENV.inspect
 platform :ios do
   desc "Push a new beta build to TestFlight"
   lane :setupCodeSigningIos do
+    puts ENV.inspect
     setupCodeSigning(ENV["KEYCHAIN_PASSWORD"])
     install_provisioning_profile(path: ENV["AD_PROVISION_PATH"])
     setupCodeCertificate(ENV["KEYCHAIN_PASSWORD"], ENV["CERTIFICATE_PASSWORD"], ENV["CERTIFICATE_PATH"])
