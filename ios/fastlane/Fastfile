@@ -45,7 +45,7 @@ def setupCodeSigning(keychainPassword)
     unlock: true,
     timeout: 3600,
     lock_when_sleeps: false,
-    require_create: false
+    require_create: true
   )
 end
 
