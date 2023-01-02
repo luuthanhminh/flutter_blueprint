@@ -24,7 +24,7 @@ pipeline {
                     }
 
                     withCredentials([file(credentialsId: 'AD_flBlueprint_mobileprovision', variable: 'mobileprovision')]) {
-                            sh "sudo cp ${mobileprovision} $WORKSPACE/ios/fastlane/AD_flBlueprint.mobileprovision"
+                            sh "sudo cp ${mobileprovision} $WORKSPACE/ios/fastlane/AS_Fliteboard_Dev.mobileprovision"
                     }
 
                     withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
