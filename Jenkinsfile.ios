@@ -28,7 +28,7 @@ pipeline {
                     }
 
                     withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
-                        sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/blueprint_Certificates.p12"
+                        sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/flite_certificates.p12"
                     }
 
                     sh "fvm flutter clean"
