@@ -20,19 +20,19 @@ pipeline {
                     sh "fvm use 3.3.0"
 
                     withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV_BLUEPRINT')]) {
-                        sh "cp ${ENV_BLUEPRINT} $WORKSPACE/ios/fastlane/.env"
+                        sh "sudo cp ${ENV_BLUEPRINT} $WORKSPACE/ios/fastlane/.env"
                     }
 
                     withCredentials([file(credentialsId: 'AD_flBlueprint_mobileprovision', variable: 'mobileprovision')]) {
-                            sh "cp ${mobileprovision} $WORKSPACE/ios/fastlane/AS_Fliteboard_Dev.mobileprovision"
+                            sh "sudo cp ${mobileprovision} $WORKSPACE/ios/fastlane/AS_Fliteboard_Dev.mobileprovision"
                     }
 
                     withCredentials([file(credentialsId: 'AD_comfliteboardfliteappdev', variable: 'mobileprovisionDev')]) {
-                            sh "cp ${mobileprovisionDev} $WORKSPACE/ios/fastlane/AD_comfliteboardfliteappdev.mobileprovision"
+                            sh "sudo cp ${mobileprovisionDev} $WORKSPACE/ios/fastlane/AD_comfliteboardfliteappdev.mobileprovision"
                     }
 
                     withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
-                        sh "cp ${certificates} $WORKSPACE/ios/fastlane/flite_certificates.p12"
+                        sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/flite_certificates.p12"
                     }
 
                     sh "fvm flutter clean"
