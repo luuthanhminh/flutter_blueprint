@@ -1,7 +1,7 @@
 import 'package:fl_blueprint/setup.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
-import 'package:url_launcher/url_launcher.dart';
+// import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+// import 'package:url_launcher/url_launcher.dart';
 
 import '../../services/navigation_service.dart';
 
@@ -17,7 +17,7 @@ class InAppWebViewExampleScreen extends StatefulWidget {
 }
 
 class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
-  InAppWebViewController? webView;
+  // InAppWebViewController? webView;
   final String _url;
   bool _showLoading = true;
   _InAppWebViewExampleScreenState(this._url);
@@ -53,43 +53,7 @@ class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
               margin: const EdgeInsets.all(10.0),
               decoration:
                   BoxDecoration(border: Border.all(color: Colors.blueAccent)),
-              child: InAppWebView(
-                initialUrlRequest: URLRequest(url: Uri.parse(_url)),
-                // initialFile: "assets/index.html",
-                initialOptions: InAppWebViewGroupOptions(
-                  crossPlatform: InAppWebViewOptions(
-                    useShouldOverrideUrlLoading: true,
-                  ),
-                ),
-                onWebViewCreated: (controller) {
-                  webView = controller;
-                  print("onWebViewCreated");
-                },
-
-                shouldOverrideUrlLoading:
-                    (controller, shouldOverrideUrlLoadingRequest) async {
-                  var uri = shouldOverrideUrlLoadingRequest.request.url!;
-
-                  if (![
-                    "http",
-                    "https",
-                    "file",
-                    "chrome",
-                    "data",
-                    "javascript",
-                    "about"
-                  ].contains(uri.scheme)) {
-                  }
-
-                  return NavigationActionPolicy.ALLOW;
-                },
-                onLoadStop: (controller, url) async {
-                  print("onLoadStop $url");
-                  setState(() {
-                    _showLoading = false;
-                  });
-                },
-              ),
+              child: Container(),
             ),
           ),
         ])));
