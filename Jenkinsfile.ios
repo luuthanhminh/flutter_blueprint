@@ -35,7 +35,7 @@ pipeline {
                         sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/Dev_Certificates.p12"
                     }
 
-                    sh "fvm flutter clean"
+                    sh "sudo fvm flutter clean"
     sh "fvm flutter pub get"
     sh "fvm flutter precache --ios"
     
@@ -62,11 +62,11 @@ pipeline {
                     dir("ios") {
                         sh "rm -rf Pods " 
     sh "rm -rf Podfile.lock  "
-    sh "pod update"
+    sh "sudo pod update"
                         // sh "sudo fastlane run update_fastlane"
                         sh "sudo fastlane setupCodeSigningIos"
                     }
-                    sh "fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
+                    sh "sudo fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
                     dir("ios") {
                         sh "sudo fastlane distribute"
                     }
