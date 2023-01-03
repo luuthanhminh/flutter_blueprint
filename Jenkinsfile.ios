@@ -66,7 +66,7 @@ pipeline {
                         // sh "sudo fastlane run update_fastlane"
                         sh "sudo fastlane setupCodeSigningIos"
                     }
-                    sh "sudo fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
+                    sh "fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
                     dir("ios") {
                         sh "sudo fastlane distribute"
                     }
