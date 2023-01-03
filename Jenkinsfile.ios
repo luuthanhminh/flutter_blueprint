@@ -64,7 +64,7 @@ pipeline {
     sh "rm -rf Podfile.lock  "
     sh "pod update"
                         // sh "sudo fastlane run update_fastlane"
-                        sh "sudo fastlane setupCodeSigningIos"
+                        // sh "sudo fastlane setupCodeSigningIos"
                     }
                     sh "fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
                     dir("ios") {
