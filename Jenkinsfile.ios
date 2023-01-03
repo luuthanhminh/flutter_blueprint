@@ -28,11 +28,11 @@ pipeline {
                     }
 
                     withCredentials([file(credentialsId: 'AD_comfliteboardfliteappdev', variable: 'mobileprovisionDev')]) {
-                            sh "sudo cp ${mobileprovisionDev} $WORKSPACE/ios/fastlane/AD_comfliteboardfliteappdev.mobileprovision"
+                            sh "sudo cp ${mobileprovisionDev} $WORKSPACE/ios/fastlane/AD2_Blueprint.mobileprovision"
                     }
 
                     withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
-                        sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/flite_certificates.p12"
+                        sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/Dev_Certificates.p12"
                     }
 
                     sh "fvm flutter clean"

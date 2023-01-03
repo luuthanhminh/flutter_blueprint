@@ -358,7 +358,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = 5LPVUWDHDS;
+				DEVELOPMENT_TEAM = 55U8F4999W;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 55U8F4999W;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -376,8 +376,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fliteboard.fliteapp.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AD com.fliteboard.fliteapp.dev";
+				PROVISIONING_PROFILE_SPECIFIER = "AD2 Blueprint";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AD2 Blueprint";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -500,7 +500,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = 5LPVUWDHDS;
+				DEVELOPMENT_TEAM = 55U8F4999W;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 55U8F4999W;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -518,8 +518,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fliteboard.fliteapp.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AD com.fliteboard.fliteapp.dev";
+				PROVISIONING_PROFILE_SPECIFIER = "AD2 Blueprint";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AD2 Blueprint";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -537,7 +537,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = "$(FLUTTER_BUILD_NUMBER)";
-				DEVELOPMENT_TEAM = 5LPVUWDHDS;
+				DEVELOPMENT_TEAM = 55U8F4999W;
 				"DEVELOPMENT_TEAM[sdk=iphoneos*]" = 55U8F4999W;
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -555,8 +555,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.fliteboard.fliteapp.dev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AD com.fliteboard.fliteapp.dev";
+				PROVISIONING_PROFILE_SPECIFIER = "AD2 Blueprint";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=iphoneos*]" = "AD2 Blueprint";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
