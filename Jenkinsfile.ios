@@ -62,7 +62,7 @@ pipeline {
                     dir("ios") {
                         sh "rm -rf Pods " 
     sh "rm -rf Podfile.lock  "
-    sh "sudo pod update"
+    sh "pod update"
                         // sh "sudo fastlane run update_fastlane"
                         sh "sudo fastlane setupCodeSigningIos"
                     }
