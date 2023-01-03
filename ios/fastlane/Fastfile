@@ -24,6 +24,7 @@ platform :ios do
     puts ENV.inspect
     # setupCodeSigning(ENV["KEYCHAIN_PASSWORD"])
     install_provisioning_profile(path: ENV["AD_PROVISION_PATH"])
+    install_provisioning_profile(path: ENV["AS_PROVISION_PATH"])
     setupCodeCertificate(ENV["KEYCHAIN_PASSWORD"], ENV["CERTIFICATE_PASSWORD"], ENV["CERTIFICATE_PATH"])
   end
   desc "Firebase app distribution"

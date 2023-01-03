@@ -27,6 +27,10 @@ pipeline {
                             sh "sudo cp ${mobileprovision} $WORKSPACE/ios/fastlane/AS_Fliteboard_Dev.mobileprovision"
                     }
 
+                    withCredentials([file(credentialsId: 'AD_comfliteboardfliteappdev', variable: 'mobileprovisionDev')]) {
+                            sh "sudo cp ${mobileprovisionDev} $WORKSPACE/ios/fastlane/AD_comfliteboardfliteappdev.mobileprovision"
+                    }
+
                     withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
                         sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/flite_certificates.p12"
                     }
