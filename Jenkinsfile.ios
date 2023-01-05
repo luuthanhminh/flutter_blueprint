@@ -17,6 +17,7 @@ pipeline {
         stage('Build & Publish') {
             steps {
                 script {
+                    sh "fvm install 3.3.0"
                     sh "fvm use 3.3.0"
 
                     withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV_BLUEPRINT')]) {
