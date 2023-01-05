@@ -14,19 +14,19 @@ pipeline {
     }
 
     stages {
-        stage('Checkout'){
-            steps {
-                script {
+        // stage('Checkout'){
+        //     steps {
+        //         script {
 
-                    checkout([
-                    $class: 'GitSCM',
-                    branches: scm.branches,
-                    extensions: scm.extensions + [[$class: 'WipeWorkspace']],
-                    userRemoteConfigs: scm.userRemoteConfigs
-                    ])
-                }
-            }
-        }
+        //             checkout([
+        //             $class: 'GitSCM',
+        //             branches: scm.branches,
+        //             extensions: scm.extensions + [[$class: 'WipeWorkspace']],
+        //             userRemoteConfigs: scm.userRemoteConfigs
+        //             ])
+        //         }
+        //     }
+        // }
         stage('Build & Publish') {
             steps {
                 script {
