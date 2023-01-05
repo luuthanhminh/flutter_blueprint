@@ -14,6 +14,19 @@ pipeline {
     }
 
     stages {
+        stage('Checkout'){
+            steps {
+                script {
+
+                    checkout([
+                    $class: 'GitSCM',
+                    branches: scm.branches,
+                    extensions: scm.extensions + [[$class: 'WipeWorkspace']],
+                    userRemoteConfigs: scm.userRemoteConfigs
+                    ])
+                }
+            }
+        }
         stage('Build & Publish') {
             steps {
                 script {
@@ -37,8 +50,8 @@ pipeline {
                     }
 
                     sh "fvm flutter clean"
-    sh "fvm flutter pub get"
-    sh "fvm flutter precache --ios"
+                    sh "fvm flutter pub get"
+                    sh "fvm flutter precache --ios"
     
                     // sh "fvm flutter analyze"
                     // sh "fvm flutter test"
@@ -62,8 +75,8 @@ pipeline {
                     // sh "flutter build ipa --release --export-options-plist $WORKSPACE/export.plist"
                     dir("ios") {
                         sh "rm -rf Pods " 
-    sh "rm -rf Podfile.lock  "
-    sh "pod update"
+                        sh "rm -rf Podfile.lock  "
+                        sh "pod update"
                         // sh "sudo fastlane run update_fastlane"
                         // sh "sudo fastlane setupCodeSigningIos"
                     }
@@ -74,11 +87,6 @@ pipeline {
                 }
                 
             }
-        }
-    }
-    post { 
-        always { 
-            cleanWs()
         }
     }
 }
