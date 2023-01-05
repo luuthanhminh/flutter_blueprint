@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>method</key>
-    <string>app-store</string>
+    <string>development</string>
      <key>_fBl</key>
     <string>55U8F4999W</string>
 	<key>compileBitcode</key>
@@ -11,7 +11,7 @@
     <key>uploadSymbols</key>
 	<true/>
     <key>signingCertificate</key>
-    <string>iPhone Distribution: Fliteboard Pty Ltd (55U8F4999W)</string>
+    <string>Apple Development: Minh Luu (FA7DB7VNWU)</string>
     <key>stripSwiftSymbols</key>
     <true/>
     <key>signingStyle</key>
@@ -19,7 +19,7 @@
     <key>provisioningProfiles</key>
     <dict>
         <key>com.fliteboard.fliteapp.dev</key>
-        <string>AS Fliteboard Dev</string>
+        <string>AD2 Blueprint</string>
     </dict>
     <key>thinning</key>
     <string>&lt;none&gt;</string>
