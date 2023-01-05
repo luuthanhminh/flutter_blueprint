@@ -20,22 +20,22 @@ pipeline {
                     sh "fvm use 3.3.0"
 
                     withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV_BLUEPRINT')]) {
-                        sh "sudo cp ${ENV_BLUEPRINT} $WORKSPACE/ios/fastlane/.env"
+                        sh "cp ${ENV_BLUEPRINT} $WORKSPACE/ios/fastlane/.env"
                     }
 
                     withCredentials([file(credentialsId: 'AD_flBlueprint_mobileprovision', variable: 'mobileprovision')]) {
-                            sh "sudo cp ${mobileprovision} $WORKSPACE/ios/fastlane/AS_Fliteboard_Dev.mobileprovision"
+                            sh "cp ${mobileprovision} $WORKSPACE/ios/fastlane/AS_Fliteboard_Dev.mobileprovision"
                     }
 
                     withCredentials([file(credentialsId: 'AD_comfliteboardfliteappdev', variable: 'mobileprovisionDev')]) {
-                            sh "sudo cp ${mobileprovisionDev} $WORKSPACE/ios/fastlane/AD2_Blueprint.mobileprovision"
+                            sh "cp ${mobileprovisionDev} $WORKSPACE/ios/fastlane/AD2_Blueprint.mobileprovision"
                     }
 
                     withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
-                        sh "sudo cp ${certificates} $WORKSPACE/ios/fastlane/Dev_Certificates.p12"
+                        sh "cp ${certificates} $WORKSPACE/ios/fastlane/Dev_Certificates.p12"
                     }
 
-                    sh "sudo fvm flutter clean"
+                    sh "fvm flutter clean"
     sh "fvm flutter pub get"
     sh "fvm flutter precache --ios"
     
@@ -68,7 +68,7 @@ pipeline {
                     }
                     sh "fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
                     dir("ios") {
-                        sh "sudo fastlane distribute"
+                        sh "fastlane distribute"
                     }
                 }
                 
