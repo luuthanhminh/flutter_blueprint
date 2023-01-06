@@ -29,7 +29,7 @@ class AppRoute {
       case inAppWebViewPage:
         return MaterialPageRoute(
             builder: (_) =>
-                InAppWebViewExampleScreen(settings.arguments as String));
+                InAppWebViewExampleScreen());
       default:
         return MaterialPageRoute(builder: (_) => SplashPage());
     }

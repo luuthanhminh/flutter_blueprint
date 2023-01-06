@@ -45,9 +45,31 @@ pipeline {
                     withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
                         sh "cp ${certificates} $WORKSPACE/ios/fastlane/Dev_Certificates.p12"
                     }
+
+                    sh "fvm use 3.3.0"
                 }
             }
         }
+        stage('Analyze') {
+            steps {
+                script {
+                    sh "fvm flutter analyze"
+                }
+                
+            }
+        }
+
+        stage('Test & Coverage') {
+            steps {
+                script {
+                    sh "fvm flutter test"
+                    sh "fvm flutter test --coverage"
+                    sh "genhtml coverage/lcov.info -o coverage"
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'coverage/index.html', reportName: 'HTML Coverage Report', reportTitles: 'Coverage Report'])
+                } 
+            }
+        }
+
         stage('Build') {
             steps {
                 script {

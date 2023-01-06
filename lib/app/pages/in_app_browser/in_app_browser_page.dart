@@ -7,20 +7,19 @@ import '../../services/navigation_service.dart';
 
 /// Browser in application
 class InAppWebViewExampleScreen extends StatefulWidget {
-  final String _url;
+  // final String _url;
 
   /// Constructor for new instance
-  InAppWebViewExampleScreen(this._url);
+  InAppWebViewExampleScreen();
   @override
   _InAppWebViewExampleScreenState createState() =>
-      _InAppWebViewExampleScreenState(_url);
+      _InAppWebViewExampleScreenState();
 }
 
 class _InAppWebViewExampleScreenState extends State<InAppWebViewExampleScreen> {
   // InAppWebViewController? webView;
-  final String _url;
-  bool _showLoading = true;
-  _InAppWebViewExampleScreenState(this._url);
+  final bool _showLoading = true;
+  _InAppWebViewExampleScreenState();
   @override
   void initState() {
     super.initState();
