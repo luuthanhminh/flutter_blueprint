@@ -48,38 +48,7 @@ pipeline {
                     withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
                         sh "cp ${certificates} $WORKSPACE/ios/fastlane/Dev_Certificates.p12"
                     }
-
-                    // sh "fvm flutter clean"
-                    // sh "fvm flutter pub get"
-                    // sh "fvm flutter precache --ios"
-    
-                    // sh "fvm flutter analyze"
-                    // sh "fvm flutter test"
-
-                    // configFileProvider([configFile(fileId: '71d3722f-47e4-4adc-be51-79eedf0b279d', replaceTokens: true, targetLocation: 'vmscanner-config.json')]) {}
-                    // configFileProvider([configFile(fileId: '9ecf82be-1264-470a-99bb-49c64012c9d5', replaceTokens: true, targetLocation: 'export.plist')]) {}
-                    // // Get Apple Store Apikey
-                    // configFileProvider([configFile(fileId: 'a0857216-90f4-40c8-8991-e69899305190', replaceTokens: true, targetLocation: 'appstore_auth.json')]) {}
-                    // dir("ios") {
-                    //     withCredentials([file(credentialsId: 'vmscanner-appstore', variable: 'PROVISION'), file(credentialsId: 'vmscanner-cert', variable: 'CERTIFICATE')]) {
-                    //         def cfg = readJSON file:"$WORKSPACE/vmscanner-config.json"
-                    //         withEnv(["PROVISION_PATH=${PROVISION}", "CERTIFICATE_PATH=${CERTIFICATE}", "KEYCHAIN_PASSWORD=${cfg.keychainPassword}", "CERTIFICATE_PASSWORD=${cfg.certificatePassword}", "key_filepath=$WORKSPACE/appstore_auth.json"]) {
-                    //             sh "figlet Signing"
-                    //             // Remove existing profile if existed
-                    //             sh "fastlane sigh manage -p \"VM Scanner AppStore Distribution\" --force"
-                    //             sh "pod install"
-                    //             sh "fastlane config_app"
-                    //         }
-                    //     }
-                    // }
-                    // sh "flutter build ipa --release --export-options-plist $WORKSPACE/export.plist"
-                    // dir("ios") {
-                    //     sh "rm -rf Pods " 
-                    //     sh "rm -rf Podfile.lock  "
-                    //     sh "pod update"
-                    //     // sh "sudo fastlane run update_fastlane"
-                    //     // sh "sudo fastlane setupCodeSigningIos"
-                    // }
+                    
                     sh "fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
                     dir("ios") {
                         sh "fastlane distribute"

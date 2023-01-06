@@ -32,7 +32,7 @@ platform :ios do
     firebase_app_distribution(
         app: ENV["FIREBASE_APP_ID_IOS"],
         firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
-        ipa_path: "../build/ios/ipa/*.ipa"
+        ipa_path: "../build/ios/ipa/fl_blueprint.ipa"
 
         
     )
