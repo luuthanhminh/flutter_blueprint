@@ -14,23 +14,22 @@ pipeline {
     }
 
     stages {
-        stage('Build & Publish') {
+        stage('Checkout'){
             steps {
                 script {
-                    sh "fvm use 3.3.0"
-                    
-                    // def cfg = readJSON file:"$WORKSPACE/firebaseConfig.json"
-                    // def testers = "${cfg.testers.join(',')}"
-                    // writeFile file: "$WORKSPACE/testers.txt", text: testers.replace("\"", "")
-                    // def firebaseAppId = cfg.firebaseAppId
-                    // webhookUrl = cfg.webhookUrl
-                    // dir("android") {
-                    //     sh "echo org.gradle.java.home=/Library/Java/JavaVirtualMachines/jdk-12.0.2.jdk/Contents/Home >> gradle.properties"   
-                    //     withEnv(["GOOGLE_APPLICATION_CREDENTIALS=$WORKSPACE/firebase_cred.json", "FIREBASE_APP_ID=${firebaseAppId}", "TESTERS=$WORKSPACE/testers.txt"]) {
-                    //             sh "figlet Increase version"
-                    //             sh "fastlane increment_version"
-                    //     }
-                    // }
+
+                    checkout([
+                    $class: 'GitSCM',
+                    branches: scm.branches,
+                    extensions: scm.extensions + [[$class: 'WipeWorkspace']],
+                    userRemoteConfigs: scm.userRemoteConfigs
+                    ])
+                }
+            }
+        }
+        stage('Prepare Environment') {
+            steps {
+                script {
                     sh "ls -la android"
                     
                     withCredentials([file(credentialsId: 'flite_android_keystore', variable: 'KEYSTORE')]) {
@@ -45,27 +44,56 @@ pipeline {
                         sh "sudo cp ${ENV_BLUEPRINT} $WORKSPACE/android/fastlane/.env"
                     }
 
-                    sh "fvm flutter pub get"
+                    sh "fvm use 3.3.0"
+                }
+            }
+        }
+        stage('Analyze') {
+            steps {
+                script {
                     sh "fvm flutter analyze"
-                    sh "fvm flutter test"
+                }
+                
+            }
+        }
 
+        stage('Test & Coverage') {
+            steps {
+                script {
+                    sh "fvm flutter test"
+                    sh "fvm flutter test --coverage"
+                    sh "genhtml coverage/lcov.info -o coverage"
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'coverage/index.html', reportName: 'HTML Coverage Report', reportTitles: 'Coverage Report'])
+                } 
+            }
+        }
+
+        stage('Increment Version') {
+            steps {
+                script {
                     dir("android") {
                         sh "fastlane increment_version"
                     }
+                }
+                
+            }
+        }
+
+        stage('Export APK') {
+            steps {
+                script {
                     sh "fvm flutter build apk --release"
+                }
+                
+            }
+        }
+
+        stage('Publish to firebase') {
+            steps {
+                script {
                     dir("android") {
                         sh "fastlane distribute"
                     }
-                    // dir("android") {
-                    //      withEnv(["GOOGLE_APPLICATION_CREDENTIALS=$WORKSPACE/firebase_cred.json", "FIREBASE_APP_ID=${firebaseAppId}", "TESTERS=$WORKSPACE/testers.txt", "RELEASE=$WORKSPACE/release.txt"]) {
-                    //         // sh "figlet Publish to Firebase"
-                    //         sh "fastlane distribute"
-                    //         // def release = sh returnStdout: true, script: 'fastlane export_latest_release | tee |  grep FIREBASE_RELEASE'
-                    //         // def urlsplitted = release.split('/')
-                    //         // def releaseName = urlsplitted[urlsplitted.length-1]
-                    //         // publishedUrl = cfg.firebaseDistributionUrl + releaseName
-                    //     }
-                    // }
                 }
                 
             }

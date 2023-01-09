@@ -73,8 +73,6 @@ pipeline {
         stage('Build') {
             steps {
                 script {
-                    // sh "fvm install 3.3.0"
-                    sh "fvm use 3.3.0"
                     sh "fvm flutter build ios"
                 }
                 
@@ -84,8 +82,6 @@ pipeline {
         stage('Export Ipa') {
             steps {
                 script {
-                    // sh "fvm install 3.3.0"
-                    sh "fvm use 3.3.0"
                     sh "fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
                 }
                 
@@ -95,7 +91,6 @@ pipeline {
         stage('Publish to firebase') {
             steps {
                 script {
-                    sh "fvm use 3.3.0"
                     dir("ios") {
                         sh "fastlane distribute"
                     }
