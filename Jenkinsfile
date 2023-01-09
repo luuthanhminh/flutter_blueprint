@@ -62,8 +62,8 @@ pipeline {
                 script {
                     sh "fvm flutter test"
                     sh "fvm flutter test --coverage"
-                    sh "genhtml coverage/lcov.info -o coverage"
-                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'coverage/index.html', reportName: 'HTML Coverage Report', reportTitles: 'Coverage Report'])
+                    //sh "genhtml coverage/lcov.info -o coverage"
+                    //publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'coverage/index.html', reportName: 'HTML Coverage Report', reportTitles: 'Coverage Report'])
                 } 
             }
         }
