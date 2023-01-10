@@ -27,9 +27,13 @@ platform :android do
       increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
     end
   end
+  desc "Build apk"
   lane :build do
-    gradle(task: "clean")
-    gradle(task: "assemble", build_type: "Release")
+    Dir.chdir "../.." do
+      sh("flutter", "packages", "get")
+      sh("flutter", "clean")
+      sh("flutter", "build", "apk","--release")
+    end
   end
   desc "Firebase app distribution"
   lane :distribute do

@@ -1,0 +1,42 @@
+# .macos_saas_runners:
+#   tags:
+#     - shared-macos-amd64
+stages: #used to define stages that can be used by jobs and is defined globally
+  # - deployIOS
+  - deployAndroid
+variables:
+  LC_ALL: "en_US.UTF-8"
+  LANG: "en_US.UTF-8"
+  KEY_PROPERTIES: $KEY_PROPERTIES
+  APP_RELEASE_KEY: $APP_RELEASE_KEY
+  FASTLANE_KEYS: $FASTLANE_KEYS
+
+before_script:
+  - apt-get -qq update
+  - apt-get install -qqy --no-install-recommends build-essential ruby-full
+  - apt-get install -y curl
+  - bundle install
+
+deployAndroid:
+  dependencies: []
+  # tags: [ shared-macos-amd64 ]
+  # image: openjdk:8-jdk
+  image: cirrusci/flutter:3.3.0
+  stage: deployAndroid
+  before_script:
+    - echo $KEY_PROPERTIES | base64 -d > android/key.properties
+    - echo $APP_RELEASE_KEY | base64 -d > android/app/myapp-release-key.jks
+    - echo $FASTLANE_KEYS | base64 -d > android/fastlane/.env
+    - gem install fastlane
+
+  script: #scrip when work with current state
+    - export GRADLE_USER_HOME=$(pwd)/.gradle
+    - flutter analyze
+    - flutter test
+    - cd android/
+    - fastlane increment_version
+    - fastlane build
+    - fastlane distribute
+
+  # only: #defines the names of branches and tags for which the job will run
+    # - feature/gitlab
