@@ -38,5 +38,5 @@ deployAndroid:
     - fastlane build
     - fastlane distribute
 
-  # only: #defines the names of branches and tags for which the job will run
-    # - feature/gitlab
+  only: #defines the names of branches and tags for which the job will run
+    - feature/gitlab
