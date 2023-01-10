@@ -3,35 +3,6 @@ format_version: '11'
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
 project_type: flutter
 workflows:
-  deploy:
-    description: |
-      Builds and deploys app using [Deploy to bitrise.io Step](https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html#deploying-a-flutter-app).
-
-      If you build for iOS, make sure to set up code signing secrets on Bitrise for a successful build.
-
-      Next steps:
-      - Check out [Getting started with Flutter apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html) for signing and deployment options.
-      - Check out the [Code signing guide](https://devcenter.bitrise.io/en/code-signing.html) for iOS and Android
-    steps:
-    - git-clone@6: {}
-    - certificate-and-profile-installer@1: {}
-    - flutter-installer@0:
-        inputs:
-        - is_update: 'false'
-    - cache-pull@2: {}
-    - flutter-analyze@0:
-        inputs:
-        - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
-    - flutter-test@1:
-        inputs:
-        - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
-    - flutter-build@0:
-        inputs:
-        - project_location: "$BITRISE_FLUTTER_PROJECT_LOCATION"
-        - platform: both
-        - ios_output_type: archive
-    - cache-push@2: {}
-    - deploy-to-bitrise-io@2: {}
   android:
     description: |
       Builds project and runs tests.
@@ -50,7 +21,30 @@ workflows:
     - firebase-app-distribution@0:
         inputs:
         - firebase_token: "$FIREBASE_TOKEN_ANDROID"
+        - app_path: "$BITRISE_APK_PATH"
         - app: 1:87606323563:android:25218fc67561c13071442e
+  ios:
+    description: |
+      Builds project and runs tests.
+
+      Next steps:
+      - Check out [Getting started with Flutter apps](https://devcenter.bitrise.io/en/getting-started/getting-started-with-flutter-apps.html).
+    steps:
+    - git-clone@6: {}
+    - flutter-installer@0:
+        inputs:
+        - version: 3.3.0
+        - is_update: 'false'
+    - certificate-and-profile-installer@1: {}
+    - flutter-build@0:
+        inputs:
+        - ios_output_type: archive
+        - ios_additional_params: "--release --export-options-plist=ios/Runner/export.plist"
+        - platform: ios
+    - firebase-app-distribution@0:
+        inputs:
+        - firebase_token: "$IOS_TOKEN"
+        - app: 1:87606323563:ios:6b876eda4391cc8e71442e
 meta:
   bitrise.io:
     stack: osx-xcode-14.1.x
@@ -59,6 +53,12 @@ app:
   - opts:
       is_expand: false
     BITRISE_FLUTTER_PROJECT_LOCATION: "."
+  - opts:
+      is_expand: false
+    BITRISE_SCHEME: Runner
+  - opts:
+      is_expand: false
+    BITRISE_IPA_PATH: "/Users/vagrant/git/build/ios/ipa/fl_blueprint.ipa"
 trigger_map:
 - push_branch: master
-  workflow: primary
+  workflow: android
