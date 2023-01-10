@@ -16,23 +16,26 @@
 default_platform(:android)
 
 platform :android do
-  desc "Runs all the tests"
-  lane :test do
-    gradle(task: "test")
+  lane :increment_version do
+    latest_release = firebase_app_distribution_get_latest_release(
+      app: ENV["FIREBASE_APP_ANDROID_ID"],
+      firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"]
+    )
+    if latest_release.nil?
+      puts "No latest release found"
+    else
+      increment_version_code({ version_code: latest_release[:buildVersion].to_i + 1 })
+    end
   end
-
-  desc "Submit a new Beta Build to Crashlytics Beta"
-  lane :beta do
-    gradle(task: "clean assembleRelease")
-    crashlytics
-  
-    # sh "your_script.sh"
-    # You can also use other beta testing services here
+  lane :build do
+    gradle(task: "clean")
+    gradle(task: "assemble", build_type: "Release")
   end
-
-  desc "Deploy a new version to the Google Play"
-  lane :deploy do
-    gradle(task: "clean assembleRelease")
-    upload_to_play_store
+  desc "Firebase app distribution"
+  lane :distribute do
+    firebase_app_distribution(
+        app: ENV["FIREBASE_APP_ANDROID_ID"],
+        firebase_cli_token: ENV["FIREBASE_CLI_TOKEN"],
+        android_artifact_path: "../build/app/outputs/flutter-apk/app-release.apk")
   end
 end

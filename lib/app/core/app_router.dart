@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_classes_with_only_static_members
+
 import 'package:fl_blueprint/app/pages/pages.dart';
 import 'package:flutter/material.dart';
 
@@ -27,7 +29,7 @@ class AppRoute {
       case inAppWebViewPage:
         return MaterialPageRoute(
             builder: (_) =>
-                InAppWebViewExampleScreen(settings.arguments as String));
+                InAppWebViewExampleScreen());
       default:
         return MaterialPageRoute(builder: (_) => SplashPage());
     }

@@ -1,6 +1,5 @@
 import 'dart:math' as math show sin, pi;
 import 'package:flutter/material.dart';
-import 'package:flutter/animation.dart';
 
 /// {@template fading_circle}
 /// {@endtemplate}
@@ -14,7 +13,7 @@ class FadingCircle extends StatefulWidget {
     this.duration = const Duration(milliseconds: 1200),
     this.controller,
   })  : assert(
-            !(itemBuilder is IndexedWidgetBuilder && color is Color),
+            !(itemBuilder is IndexedWidgetBuilder),
             'You should specify either a itemBuilder or a color'),
         super(key: key);
 

@@ -11,7 +11,7 @@ import '../../widgets/page_widget.dart';
 class CardsPage extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    WidgetsBinding.instance?.addPostFrameCallback((_) {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(cardsViewModelProvider.notifier).initialize();
     });
     debugPrint('CardsPage builder');

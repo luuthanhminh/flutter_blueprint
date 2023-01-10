@@ -1,0 +1,102 @@
+
+def publishedUrl = ""
+def webhookUrl = ""
+
+pipeline {
+    agent { label 'macslave' }
+
+    environment {
+        PATH = "/opt/homebrew/bin:$PATH"
+        LANG = 'en_US.UTF-8'
+        LANGUAGE    = 'en_US.UTF-8'
+        LC_ALL    = 'en_US.UTF-8'
+        // FVM_HOME = '/Users/Shared/fvm'
+    }
+
+    stages {
+        stage('Checkout'){
+            steps {
+                script {
+
+                    checkout([
+                    $class: 'GitSCM',
+                    branches: scm.branches,
+                    extensions: scm.extensions + [[$class: 'WipeWorkspace']],
+                    userRemoteConfigs: scm.userRemoteConfigs
+                    ])
+                }
+            }
+        }
+        stage('Prepare Environment') {
+            steps {
+                script {
+                    withCredentials([file(credentialsId: 'blueprint_env', variable: 'ENV_BLUEPRINT')]) {
+                        sh "cp ${ENV_BLUEPRINT} $WORKSPACE/ios/fastlane/.env"
+                    }
+
+                    withCredentials([file(credentialsId: 'AD_flBlueprint_mobileprovision', variable: 'mobileprovision')]) {
+                            sh "cp ${mobileprovision} $WORKSPACE/ios/fastlane/AS_Fliteboard_Dev.mobileprovision"
+                    }
+
+                    withCredentials([file(credentialsId: 'AD_comfliteboardfliteappdev', variable: 'mobileprovisionDev')]) {
+                            sh "cp ${mobileprovisionDev} $WORKSPACE/ios/fastlane/AD2_Blueprint.mobileprovision"
+                    }
+
+                    withCredentials([file(credentialsId: 'blueprint_Certificates', variable: 'certificates')]) {
+                        sh "cp ${certificates} $WORKSPACE/ios/fastlane/Dev_Certificates.p12"
+                    }
+
+                    sh "fvm use 3.3.0"
+                }
+            }
+        }
+        stage('Analyze') {
+            steps {
+                script {
+                    sh "fvm flutter analyze"
+                }
+                
+            }
+        }
+
+        stage('Test & Coverage') {
+            steps {
+                script {
+                    sh "fvm flutter test"
+                    sh "fvm flutter test --coverage"
+                    sh "genhtml coverage/lcov.info -o coverage"
+                    publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: '', reportFiles: 'coverage/index.html', reportName: 'HTML Coverage Report', reportTitles: 'Coverage Report'])
+                } 
+            }
+        }
+
+        stage('Build') {
+            steps {
+                script {
+                    sh "fvm flutter build ios"
+                }
+                
+            }
+        }
+
+        stage('Export Ipa') {
+            steps {
+                script {
+                    sh "fvm flutter build ipa --release --export-options-plist=ios/Runner/export.plist"
+                }
+                
+            }
+        }
+
+        stage('Publish to firebase') {
+            steps {
+                script {
+                    dir("ios") {
+                        sh "fastlane distribute"
+                    }
+                }
+                
+            }
+        }
+    }
+}

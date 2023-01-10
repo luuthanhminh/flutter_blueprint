@@ -1,7 +1,5 @@
 import 'package:fl_blueprint/domain/domain.dart';
 
-import 'base_usecase.dart';
-
 class FetchCardsUseCase extends BaseUseCase<List<DCard>, Object?> {
   final CardsRespository _cardsRespository;
   FetchCardsUseCase(this._cardsRespository);
